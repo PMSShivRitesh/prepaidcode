@@ -1,0 +1,124 @@
+@charset "UTF-8";
+
+::selection {
+	background: #08c;
+	color: #fff;
+}
+
+::-moz-selection {
+	background: #08c;
+	color: #fff;
+}
+
+.course-card {
+	min-width: 17.55rem;
+	width: 17.55rem
+}
+
+.course-card a {
+	color: #404040;
+	text-decoration: none
+}
+
+.collapse-card {
+	background-color: #fff;
+	border: 1px solid #ddd;
+	color: #494949;
+	-webkit-transition: .4s;
+	-moz-transition: .4s;
+	-o-transition: .4s;
+	transition: .4s
+}
+
+.collapse-card * {
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box
+}
+
+.collapse-card.active {
+	box-shadow: 0 5px 7px 0 rgba(0, 0, 0, 0.15), 0 0 2px 0
+		rgba(0, 0, 0, 0.19);
+	margin: 10px 0rem 10px 0rem;
+	z-index: 200;
+	background-color: #fff;
+}
+
+.collapse-card.active .collapse-card__heading {
+	background-color: #dfeffc;
+}
+
+.collapse-card.active .collapse-card__heading:hover::after {
+	content: "";
+}
+
+.collapse-card .collapse-card__heading:hover::after {
+	content: "";
+}
+
+.collapse-card .collapse-card__heading .collapse-card__title {
+	background-image: url("../images/collapseright.png");
+	background-repeat: no-repeat;
+	background-position: 0px center;
+	text-align: left;
+	padding-left: 18px;
+	color: #777 !important;
+}
+
+.collapse-card.active .collapse-card__heading .collapse-card__title {
+	background-image: url("../images/collapsedown.png");
+	background-repeat: no-repeat;
+	background-position: 0px center;
+	text-align: left;
+	padding-left: 18px;
+	color: #404040 !important;
+}
+
+.collapse-card__heading {
+	cursor: pointer;
+	padding: 3px 3px 3px 7px;
+	position: relative;
+}
+
+.collapse-card__heading:before, .collapse-card__heading:after {
+	content: " ";
+	display: table
+}
+
+.collapse-card__heading:after {
+	clear: both
+}
+
+.collapse-card__heading i {
+	float: left
+}
+
+.collapse-card__heading::after {
+	color: #404040;
+	font-size: 1rem;
+	line-height: 2rem;
+	padding-left: .4rem;
+	position: absolute;
+	right: 1rem;
+	top: 1rem;
+	background-color: #fff;
+}
+
+.collapse-card__title {
+	font-size: 13px;
+	font-weight: bold;
+	line-height: 2rem;
+	margin: 0 2rem 0 0;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	line-height: 2rem;
+}
+
+.collapse-card__body {
+	padding: 1rem;
+	display: none;
+	border-color: scrollbar !important;
+	border-top-style: inherit;
+	border-top-width: inherit;
+}

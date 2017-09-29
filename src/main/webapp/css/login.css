@@ -1,0 +1,90 @@
+.form-signin {
+	max-width: 20%;
+	padding: 40px 55px;
+	margin: 6.8% auto;
+	background-color: #fff;
+	border: 2px solid #e5e5e5;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	-webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, .05);
+	-moz-box-shadow: 0 1px 2px rgba(0, 0, 0, .05);
+	box-shadow: 0 2px 2px rgba(0, 0, 0, .05);
+}
+
+.form-signin .checkbox {
+	margin: 12px 0px 5px 0px;
+	padding: 0px 0px 0px 0px;
+}
+
+.form-signin .checkbox input[type="checkbox"] {
+	width: auto !important;
+	margin: 0px 5px 0px 0px !important;
+}
+
+.form-signin input[type="text"], .form-signin input[type="password"],
+	.form-signin select {
+	font-size: 14px;
+	min-height: 36px !important;
+	margin: 0px 0px 13px 0px;
+	padding: 7px 10px;
+}
+
+.form-signin .btn {
+	font-size: 14px;
+	font-weight: bold;
+	line-height: 21px;
+}
+
+#iderror_login {
+	position: absolute;
+	top: 88px;
+	left: 0;
+	right: 0;
+	margin: 0 auto;
+	width: 26.1%;
+	padding: 8px 14px;
+}
+
+#idsuccess_logout {
+	position: absolute;
+	top: 88px;
+	left: 0;
+	right: 0;
+	margin: 0 auto;
+	width: 26.1%;
+	padding: 8px 14px;
+}
+
+#idsuccess_change_pass {
+	margin: 1% 0% 5% 0%;;
+	padding: 15px 15px;
+	font-weight: bold;
+}
+
+.logininfo {
+	position: absolute;
+	top: 10px;
+	right: 140px;
+	height: 85px;
+	line-height: 150%;
+	color: #0088cc;
+}
+
+.logininfo span {
+	display: block;
+}
+
+.btn-login {
+	display: inline-block;
+	text-align: center;
+	width: 100%;
+	text-align: center;
+	vertical-align: middle;
+	line-height: 90px;
+	margin-bottom: 5%;
+}
+
+footer {
+	
+}

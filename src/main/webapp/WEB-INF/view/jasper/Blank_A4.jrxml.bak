@@ -1,0 +1,486 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.2.0.final using JasperReports Library version 6.2.0  -->
+<!-- 2016-05-21T15:53:56 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Blank_A4" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="1d55d4cc-e833-4279-9bdf-b39a9db19464">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="New Data Adapter "/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="date" class="java.util.Date">
+		<fieldDescription><![CDATA[date]]></fieldDescription>
+	</field>
+	<field name="amount" class="java.lang.Integer">
+		<fieldDescription><![CDATA[amount]]></fieldDescription>
+	</field>
+	<field name="address" class="java.lang.String">
+		<fieldDescription><![CDATA[address]]></fieldDescription>
+	</field>
+	<field name="roomNo" class="java.lang.String">
+		<fieldDescription><![CDATA[roomNo]]></fieldDescription>
+	</field>
+	<field name="photoIdProofType" class="java.lang.String">
+		<fieldDescription><![CDATA[photoIdProofType]]></fieldDescription>
+	</field>
+	<field name="emailId" class="java.lang.String">
+		<fieldDescription><![CDATA[emailId]]></fieldDescription>
+	</field>
+	<field name="mobileNo" class="java.lang.String">
+		<fieldDescription><![CDATA[mobileNo]]></fieldDescription>
+	</field>
+	<field name="prepaidCode" class="java.lang.String">
+		<fieldDescription><![CDATA[prepaidCode]]></fieldDescription>
+	</field>
+	<field name="guestName" class="java.lang.String">
+		<fieldDescription><![CDATA[guestName]]></fieldDescription>
+	</field>
+	<field name="photoIdProof" class="java.lang.String">
+		<fieldDescription><![CDATA[photoIdProof]]></fieldDescription>
+	</field>
+	<field name="id" class="java.lang.Integer">
+		<fieldDescription><![CDATA[id]]></fieldDescription>
+	</field>
+	<field name="class" class="java.lang.Class">
+		<fieldDescription><![CDATA[class]]></fieldDescription>
+	</field>
+	<field name="plan" class="java.lang.String">
+		<fieldDescription><![CDATA[plan]]></fieldDescription>
+	</field>
+	<background>
+		<band height="50" splitType="Stretch"/>
+	</background>
+	<detail>
+		<band height="238" splitType="Stretch">
+			<rectangle>
+				<reportElement x="-15" y="0" width="288" height="209" uuid="17f97465-259e-4a86-add5-135f6528c208">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<graphicElement>
+					<pen lineStyle="Solid"/>
+				</graphicElement>
+			</rectangle>
+			<line>
+				<reportElement x="-15" y="21" width="287" height="1" uuid="60280e69-0f90-470b-afac-89e0306f49de">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+				</reportElement>
+			</line>
+			<rectangle>
+				<reportElement x="282" y="0" width="288" height="209" uuid="10c969dd-5b2a-4e00-be31-d2928abfeef8">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+			</rectangle>
+			<staticText>
+				<reportElement mode="Opaque" x="283" y="1" width="286" height="20" forecolor="#006AFF" backcolor="#F0F0F0" uuid="ae6e6669-c376-4f49-b049-f552344e39d2">
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font size="6" isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[   Welcome To Keys Hotel The Aures Aurangabad!]]></text>
+			</staticText>
+			<line>
+				<reportElement x="283" y="21" width="287" height="1" uuid="39c6452e-939c-493e-a2a1-393e3af69ac8">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+			</line>
+			<textField>
+				<reportElement x="80" y="115" width="188" height="13" uuid="0c64e4a5-77b9-4110-a08c-834b20e828f8">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{mobileNo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement mode="Opaque" x="-7" y="87" width="275" height="13" backcolor="#F0F0F0" uuid="570b410a-814e-4821-bf35-39d2f2bdd595">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{photoIdProofType} + "    " + $F{photoIdProof}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement mode="Opaque" x="80" y="102" width="188" height="13" backcolor="#F0F0F0" uuid="4d84e8d8-8200-4bee-9503-971902be447a"/>
+				<textElement>
+					<font size="6" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{guestName}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="80" y="61" width="188" height="13" uuid="37206c12-7f2f-437b-9007-9cc1aa8ef19a">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{amount}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement mode="Opaque" x="80" y="30" width="188" height="13" forecolor="#FF0000" backcolor="#F0F0F0" uuid="f631628e-7a4f-430f-9ea6-fc911e879236">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement>
+					<font size="6" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{prepaidCode}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement mode="Opaque" x="-14" y="1" width="286" height="20" forecolor="#006AFF" backcolor="#F0F0F0" uuid="bab3324f-cabe-4456-a45c-983f16a95f35">
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font size="6" isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[   Welcome To Keys Hotel The Aures Aurangabad!]]></text>
+			</staticText>
+			<textField>
+				<reportElement mode="Opaque" x="-7" y="178" width="97" height="13" backcolor="#FFFFFF" uuid="14d9660d-be44-4619-8ca5-36af3106d225">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font size="7"/>
+					<paragraph spacingAfter="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="-7" y="48" width="87" height="13" uuid="02be5b9c-9dfe-4738-8ef1-7c3b8fc3b164">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<text><![CDATA[Validity]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="80" y="48" width="188" height="13" uuid="33ec1faa-32d6-4d4c-a95d-becacb1c1b61"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{plan} + "  Days"]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="-7" y="74" width="87" height="13" uuid="8d7b5498-ecbd-465b-abfd-a3c881c7189d"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<text><![CDATA[Room No.]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="80" y="74" width="188" height="13" uuid="1f66dc75-b361-4475-adb7-ac0bd163f2c4"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{roomNo}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="-7" y="128" width="87" height="13" uuid="adcd026b-9005-4944-93ac-c40014f5a1c1">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<text><![CDATA[Email]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="80" y="128" width="188" height="13" uuid="3c08de23-3909-43b7-a9f5-4fcb54b52be7"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{emailId}]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement x="90" y="156" width="178" height="35" uuid="22463ceb-a893-4683-a45b-2cd01d869f63">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+				</reportElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="-7" y="157" width="97" height="21" uuid="f23316d6-7381-4551-bac9-e6d7001c2a47"/>
+				<textElement verticalAlignment="Middle">
+					<font size="6"/>
+				</textElement>
+				<text><![CDATA[Customer Signature]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="80" y="141" width="188" height="13" uuid="ad94e944-d99a-4f8d-a6f7-8016a839d779">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{address}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="-7" y="115" width="87" height="13" uuid="13bf524d-30bb-479a-a5a9-97b2fe7a583c">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement>
+					<font size="6"/>
+					<paragraph lineSpacingSize="0.0" tabStopWidth="40"/>
+				</textElement>
+				<text><![CDATA[Mobile No.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="-7" y="102" width="87" height="13" uuid="852db42e-4f3d-45d1-b660-5b3da06a25d8">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement>
+					<font size="6"/>
+					<paragraph lineSpacingSize="0.0" tabStopWidth="40"/>
+				</textElement>
+				<text><![CDATA[Guest Name]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="-7" y="61" width="87" height="13" uuid="89f45f64-8c3e-4e5f-9cda-3229a38f5860">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement>
+					<font size="6"/>
+					<paragraph lineSpacingSize="0.0" tabStopWidth="40"/>
+				</textElement>
+				<text><![CDATA[Amount]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="-7" y="30" width="87" height="13" backcolor="#FFFFFF" uuid="5a5953c9-68e3-4a22-b7d6-ece2d5273f38">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement>
+					<font size="6"/>
+					<paragraph lineSpacingSize="0.0" tabStopWidth="40"/>
+				</textElement>
+				<text><![CDATA[Login Code]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="-7" y="141" width="87" height="13" uuid="9a1fe391-14d3-48b2-8f28-52cbd316171a">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement markup="none">
+					<font size="6"/>
+					<paragraph lineSpacingSize="0.0" tabStopWidth="40"/>
+				</textElement>
+				<text><![CDATA[Address]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="-14" y="194" width="286" height="14" backcolor="#F0F0F0" uuid="d0a3e125-4137-4fd4-b487-fc868408b7ef">
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement>
+					<font size="6" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[ ** Office Copy **    WiFi Internet Access Prepaidcode. ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="283" y="194" width="286" height="14" backcolor="#F0F0F0" uuid="32804004-94e4-4b22-b3ba-351b58c25df6">
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement>
+					<font size="6" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[ ** Customer Copy **    WiFi Internet Access Prepaidcode. ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="290" y="30" width="87" height="13" backcolor="#FFFFFF" uuid="caac815c-322c-4afa-81d0-4b2e539dde57">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement>
+					<font size="6"/>
+					<paragraph lineSpacingSize="0.0" tabStopWidth="40"/>
+				</textElement>
+				<text><![CDATA[Login Code]]></text>
+			</staticText>
+			<textField>
+				<reportElement mode="Opaque" x="377" y="30" width="188" height="13" forecolor="#FF0000" backcolor="#F0F0F0" uuid="09ea83d7-3a11-47f1-836c-bee4e1efbad9">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement>
+					<font size="6" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{prepaidCode}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="290" y="48" width="87" height="13" uuid="5355a0f9-d88e-4820-b494-59dc3ac65330">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<text><![CDATA[Validity]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="377" y="48" width="188" height="13" uuid="e05e8a77-5670-40fe-87e7-1c3898c37bf9"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{plan} + "  Days"]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="290" y="61" width="87" height="13" uuid="dfc110a9-99e0-4305-8dc3-4672a52e9a04">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement>
+					<font size="6"/>
+					<paragraph lineSpacingSize="0.0" tabStopWidth="40"/>
+				</textElement>
+				<text><![CDATA[Amount]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="377" y="61" width="188" height="13" uuid="68ef22b7-53c2-47ca-b4c1-6e571c559df7">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{amount}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="290" y="74" width="87" height="13" uuid="3e5ad970-fe9b-4af9-8427-63c695a62664"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<text><![CDATA[Room No.]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="377" y="74" width="188" height="13" uuid="730a1fe7-3a53-42e4-ab56-78d4e81081f4"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{roomNo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement mode="Opaque" x="290" y="87" width="275" height="13" backcolor="#F0F0F0" uuid="c7477b9b-fc70-4170-9853-64e7ec0bfca2">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{photoIdProofType} + "    " + $F{photoIdProof}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="290" y="102" width="87" height="13" uuid="e0e7f55e-064a-4340-97ac-eb9ab37ab54f">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement>
+					<font size="6"/>
+					<paragraph lineSpacingSize="0.0" tabStopWidth="40"/>
+				</textElement>
+				<text><![CDATA[Guest Name]]></text>
+			</staticText>
+			<textField>
+				<reportElement mode="Opaque" x="377" y="102" width="188" height="13" backcolor="#F0F0F0" uuid="477655f2-37ca-47db-b094-1ea7baadf62f"/>
+				<textElement>
+					<font size="6" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{guestName}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="290" y="115" width="87" height="13" uuid="68a0d912-5684-4112-9007-a5f0aee5888f">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement>
+					<font size="6"/>
+					<paragraph lineSpacingSize="0.0" tabStopWidth="40"/>
+				</textElement>
+				<text><![CDATA[Mobile No.]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="377" y="115" width="188" height="13" uuid="8c4971e3-c4e9-48d6-be98-6ff3a5c55607">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{mobileNo}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="290" y="128" width="87" height="13" uuid="2867f683-7855-4987-8a58-f5e853e33841">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<text><![CDATA[Email]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="377" y="128" width="188" height="13" uuid="b3e92a04-6e59-43e6-bf80-04021210d588"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{emailId}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="290" y="141" width="87" height="13" uuid="104e8f4c-2526-4aff-85b3-d2e44858036b">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement markup="none">
+					<font size="6"/>
+					<paragraph lineSpacingSize="0.0" tabStopWidth="40"/>
+				</textElement>
+				<text><![CDATA[Address]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="377" y="141" width="188" height="13" uuid="77db7ae4-574f-4f10-aae4-26e615e8726c">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{address}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="290" y="157" width="97" height="21" uuid="045499af-ebc5-43ac-9153-265a62f73edb"/>
+				<textElement verticalAlignment="Middle">
+					<font size="6"/>
+				</textElement>
+				<text><![CDATA[Customer Signature]]></text>
+			</staticText>
+			<textField>
+				<reportElement mode="Opaque" x="290" y="178" width="97" height="13" backcolor="#FFFFFF" uuid="d30b87ef-1527-4466-a42a-7dd0f7dbf4c9">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font size="7"/>
+					<paragraph spacingAfter="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new Date()]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement x="387" y="156" width="178" height="35" uuid="c443b0a8-c388-458f-b61e-5d5d972f1dce">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+				</reportElement>
+			</rectangle>
+			<image>
+				<reportElement x="271" y="211" width="14" height="17" uuid="7e17021a-01b7-4827-a3b8-f6e57ff64ce1"/>
+				<imageExpression><![CDATA["C:/Users/om/JaspersoftWorkspace/MyReports/Sclssors.png"]]></imageExpression>
+			</image>
+			<rectangle>
+				<reportElement x="277" y="-10" width="1" height="238" uuid="f4c414aa-086e-407f-a410-d3626e545860">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<graphicElement>
+					<pen lineStyle="Dashed" lineColor="#787878"/>
+				</graphicElement>
+			</rectangle>
+		</band>
+	</detail>
+</jasperReport>
