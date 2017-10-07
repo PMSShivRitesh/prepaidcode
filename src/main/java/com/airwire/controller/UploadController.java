@@ -94,6 +94,7 @@ public class UploadController {
 					prepaidCode.setWpassword(wpassword);
 				}
 				
+				prepaidCode.setHotelInfo(user.getHotlInfo());
 				prepaidCode.setAmount(amount);
 				prepaidCode.setDays(plan);
 				prepaidCode.setStatus("1");

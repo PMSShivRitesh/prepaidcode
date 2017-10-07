@@ -31,6 +31,9 @@ public class HotelInfo {
 	
 	
 	private Set<User> user;
+	private Set<PrepaidCode> prepaidCode;
+	
+	private Set<UsedPlanInfo> usedPlanInfo;
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -97,6 +100,22 @@ public class HotelInfo {
 	}
 	public void setSmsVendor(String smsVendor) {
 		this.smsVendor = smsVendor;
+	}
+	
+	@OneToMany(mappedBy="hotelInfo")
+	public Set<PrepaidCode> getPrepaidCode() {
+		return prepaidCode;
+	}
+	public void setPrepaidCode(Set<PrepaidCode> prepaidCode) {
+		this.prepaidCode = prepaidCode;
+	}
+	
+	@OneToMany(mappedBy="hotelInfo")
+	public Set<UsedPlanInfo> getUsedPlanInfo() {
+		return usedPlanInfo;
+	}
+	public void setUsedPlanInfo(Set<UsedPlanInfo> usedPlanInfo) {
+		this.usedPlanInfo = usedPlanInfo;
 	}
 
 }

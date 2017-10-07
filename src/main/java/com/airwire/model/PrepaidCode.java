@@ -24,7 +24,6 @@ public class PrepaidCode {
     @GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
 	
-	@Column(unique=true)
 	private String prepaidCode;
 	
 	private Date date;
@@ -43,8 +42,19 @@ public class PrepaidCode {
 	@ManyToOne
 	private User user;
 	
+	@ManyToOne()
+    @JoinColumn(name ="hotelInfo_id")
+	private HotelInfo hotelInfo;
+	
+	public HotelInfo getHotelInfo() {
+		return hotelInfo;
+	}
+	public void setHotelInfo(HotelInfo hotelInfo) {
+		this.hotelInfo = hotelInfo;
+	}
+	
 	@OneToOne
-	@JoinColumn(name="prepaidCode_id")
+	@JoinColumn(name="usedPlanInfo_id")
 	private UsedPlanInfo usedPlanInfo;
 	
 	public Long getId() {

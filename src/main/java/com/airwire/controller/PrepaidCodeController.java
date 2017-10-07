@@ -79,7 +79,7 @@ public class PrepaidCodeController {
 	@RequestMapping(value ="printprepaidcodepage", method =RequestMethod.GET)
 	public String myReport(@RequestParam(required=true) String prepaidCode,Principal principal,Model model){
 	
-		UsedPlanInfoDTO usedPlanInfoDTO = prepaidCodeService.getUsedPlanDTOByPrepaidCode(prepaidCode);
+		UsedPlanInfoDTO usedPlanInfoDTO = prepaidCodeService.getUsedPlanDTOByPrepaidCode(prepaidCode,principal.getName());
 		model.addAttribute("userName", principal.getName());
 		model.addAttribute("usedPlanInfo", usedPlanInfoDTO);
 		return "home/printprepaidcodepage";

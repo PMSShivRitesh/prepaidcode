@@ -43,7 +43,7 @@ public class JasperController {
 
 		List<UsedPlanInfoDTO>list=new ArrayList<UsedPlanInfoDTO>();
 		try {
-			UsedPlanInfoDTO usedPlanInfoDTO = prepaidCodeService.getUsedPlanDTOByPrepaidCode(prepaidCode);
+			UsedPlanInfoDTO usedPlanInfoDTO = prepaidCodeService.getUsedPlanDTOByPrepaidCode(prepaidCode,principal.getName());
 			if(usedPlanInfoDTO.getPrepaidCode()==null){
 				usedPlanInfoDTO.setPrepaidCode(usedPlanInfoDTO.getWuserid()+", Password :"+usedPlanInfoDTO.getWpassword());
 			}
@@ -83,7 +83,7 @@ public class JasperController {
 
 		List<UsedPlanInfoDTO>list;
 		try {
-			list=prepaidCodeService.getBulkPrepaidCode(plan,count);
+			list=prepaidCodeService.getBulkPrepaidCode(plan,count,principal.getName());
 			if(list!=null && list.size()>0){
 			String jasperFilePath = httpServletRequest.getServletContext().getRealPath("WEB-INF/view/jasper/Blank_A4_with_HotelName.jasper");//Blank_A4_Shivshanker.jrxml
 			ByteArrayOutputStream resultOutputStream =  new ByteArrayOutputStream();

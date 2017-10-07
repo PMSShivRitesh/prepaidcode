@@ -22,9 +22,9 @@ public class SmsServiceImpl implements SmsService {
 	PrepaidCodeService prepaidCodeService;
 
 	@Override
-	public String sendSms(String prepaidCode) {
+	public String sendSms(String prepaidCode,String userName) {
 		String response = "";
-		UsedPlanInfo usedPlanInfo = prepaidCodeService.getUsedPlanInfoByCode(prepaidCode);
+		UsedPlanInfo usedPlanInfo = prepaidCodeService.getUsedPlanInfoByCode(prepaidCode,userName);
 		HotelInfo hotelInfo = usedPlanInfo.getUser().getHotlInfo();
 		//String message = "Welcome To " + hotelInfo.getHotelName() + " WiFi Zone" + " your WiFi Prepaid code for ";
 		String message = hotelInfo.getMessage();

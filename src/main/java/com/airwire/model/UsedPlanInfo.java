@@ -40,6 +40,21 @@ public class UsedPlanInfo {
 	@ManyToOne
 	@JoinColumn(name="user_id")
 	private User user;
+	
+	
+	@ManyToOne
+	@JoinColumn(name="hotelInfo_id")
+	private HotelInfo hotelInfo;
+	
+	
+
+	public HotelInfo getHotelInfo() {
+		return hotelInfo;
+	}
+
+	public void setHotelInfo(HotelInfo hotelInfo) {
+		this.hotelInfo = hotelInfo;
+	}
 
 	public Long getId() {
 		return id;

@@ -1,5 +1,7 @@
 package com.airwire.controller;
 
+import java.security.Principal;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -14,8 +16,8 @@ public class SendSmsController {
 	SmsService smsService;
 	
 	@RequestMapping("sendprepaidcodeassms")
-	public String myReport(@RequestParam(required=true) String prepaidCode){
-		return smsService.sendSms(prepaidCode);
+	public String myReport(@RequestParam(required=true) String prepaidCode,Principal principal){
+		return smsService.sendSms(prepaidCode,principal.getName());
 	}
 
 }

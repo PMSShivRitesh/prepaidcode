@@ -52,7 +52,7 @@ $.ajax( {
 	 var d2=new Date(dateStr);
 	 if( d1<= d2)
 	 {
-		 $('#loginDiv').html('Oop\'s, Your License Expired Please Contact System Administrator' );
+		$('#loginDiv').html('Oop\'s, Your License Expired Please Contact System Administrator' );
 	 }
 	}
 	});

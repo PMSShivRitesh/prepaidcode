@@ -1,5 +1,6 @@
 package com.airwire.controller;
 
+import java.security.Principal;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -22,9 +23,9 @@ public class PrepaidCodeRestController {
 	SmsService smsService;
 	
 	@RequestMapping("prepaidcodestatusbyday")
-	public PrepaidCodeDeatail getprepaidcode(@RequestParam("days") String days)
+	public PrepaidCodeDeatail getprepaidcode(@RequestParam("days") String days,Principal principal)
 	{
-		PrepaidCodeDeatail prepaidCodeDeatail = prepaidCodeService.getPrepaidCode(days);
+		PrepaidCodeDeatail prepaidCodeDeatail = prepaidCodeService.getPrepaidCode(days,principal.getName());
 		return prepaidCodeDeatail;
 	}
 	

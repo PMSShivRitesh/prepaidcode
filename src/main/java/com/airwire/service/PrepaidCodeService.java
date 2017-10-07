@@ -12,9 +12,9 @@ public interface PrepaidCodeService {
 
 	boolean savePrepaidCode(PrepaidCode prepaidCode);
 	UsedPlanInfo saveRecord(UsedPlanInfo usedPlanInfo);
-	PrepaidCodeDeatail getPrepaidCode(String days);
-	UsedPlanInfo getUsedPlanInfoByCode(String code);
-	UsedPlanInfoDTO getUsedPlanDTOByPrepaidCode(String code);
-	List<UsedPlanInfoDTO> getBulkPrepaidCode(String days, int count);
+	PrepaidCodeDeatail getPrepaidCode(String days, String userName);
+	UsedPlanInfo getUsedPlanInfoByCode(String code,String userName);
+	UsedPlanInfoDTO getUsedPlanDTOByPrepaidCode(String code,String userName);
+	List<UsedPlanInfoDTO> getBulkPrepaidCode(String days, int count,String userName);
 	List<UsedPlanInfoDTO> getReportByDate(Date fromDate, Date toDate);
 }
