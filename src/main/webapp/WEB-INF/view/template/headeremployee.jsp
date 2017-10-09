@@ -1,6 +1,6 @@
 
 <div class="logo">
-	<img src="images/citrus_logo_chinchwad.png" style="width:30% !important;">
+	<img src="images/airwire.png" >
 </div>
 
 <%-- <% 

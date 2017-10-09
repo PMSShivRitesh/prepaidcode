@@ -1,7 +1,7 @@
 <div class="form-signin" id="loginDiv">
 	<!-- <img src="images/citrus_logo_chinchwad.png" width="330"> -->
 	
-	<img src="images/citrus_logo_chinchwad.png" style="margin-left: 26%;margin-top: -11%;">
+	<img src="images/airwire.png" width="330"">
 	
 
 	<p class="text-left" style="margin-bottom: 10px; margin-top: 15px;">Sign

@@ -4,10 +4,10 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.airwire</groupId>
-	<artifactId>airwirecitrus</artifactId>
+	<artifactId>airwire</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 
-	<name>airwirecitrus</name>
+	<name>airwire</name>
 	<description>airwire project for PrepaidCode generation</description>
 
 	<parent>
