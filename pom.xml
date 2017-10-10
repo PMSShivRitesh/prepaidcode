@@ -5,7 +5,7 @@
 
 	<groupId>com.airwire</groupId>
 	<artifactId>airwire</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1.0.0-Release</version>
 
 	<name>airwire</name>
 	<description>airwire project for PrepaidCode generation</description>
