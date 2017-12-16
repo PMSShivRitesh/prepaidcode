@@ -23,7 +23,7 @@ $(document).ready(function(){
 	
 	
 	$("#logout").click(function() {
-		window.location.href = "/logout";
+		window.location.href = "logout";
 	});
 	});
 	

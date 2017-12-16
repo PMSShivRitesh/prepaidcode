@@ -7,7 +7,7 @@
 	<p class="text-left" style="margin-bottom: 10px; margin-top: 15px;">Sign
 		in </p>
 
-<form method="POST" action="${contextPath}/login" id="loginForm">
+<form method="POST" action="login" id="loginForm">
 	<input type="text" class="input-block-level" placeholder="User Name"
 		id="username" name="username"> <input type="password" class="input-block-level"
 		placeholder="Password" id="password" name="password">
@@ -52,7 +52,7 @@ $.ajax( {
 	 var d2=new Date(dateStr);
 	 if( d1<= d2)
 	 {
-		$('#loginDiv').html('Oop\'s, Your License Expired Please Contact System Administrator' );
+		//$('#loginDiv').html('Oop\'s, Your License Expired Please Contact System Administrator' );
 	 }
 	}
 	});

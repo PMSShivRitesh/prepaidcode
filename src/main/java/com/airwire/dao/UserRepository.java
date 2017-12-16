@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import com.airwire.model.HotelInfo;
 import com.airwire.model.User;
 /**
  * 
@@ -12,5 +13,6 @@ import com.airwire.model.User;
  */
 public interface UserRepository extends JpaRepository<User, Long> {
     User findByUsername(String username);
-    List<User> findAll(); 
+    List<User> findAll();
+    List<User> findByHotlInfo(HotelInfo hotelInfo);
 }

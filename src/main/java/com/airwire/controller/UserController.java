@@ -2,6 +2,7 @@ package com.airwire.controller;
 
 import java.security.Principal;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,6 +36,9 @@ public class UserController {
     @RequestMapping(value = "/createuser", method = RequestMethod.GET)
     public String createUser(Model model, Principal principal) {
         model.addAttribute("roleList", userService.findAllRole());
+        User user = userService.findByUsername(principal.getName());
+        List<User> userList = userService.getAllUserListByHotel(user.getHotlInfo());
+        model.addAttribute("userList",userList);
         model.addAttribute("userName",principal.getName());
         return "admin/createuser";
     }

@@ -1,6 +1,7 @@
 <fieldset class="fieldset-style">
-	<form action="createuser" method="POST">
+	
 		<div class="form-horizontal">
+		<form action="createuser" method="POST">
 			<div class="panel panel-default">
 				<div class="panel-heading">
 					<div class="container-fluid header-padding">
@@ -67,17 +68,67 @@
 								<div class="controls">
 									<select id="role" name="roleId" Style="height: 25px; width: 206px !important;">
 									<option value="0">Select Role</option>
-										<c:forEach items="${roleList}" var="role"> 
+										<%-- <c:forEach items="${roleList}" var="role"> 
 										  <option value="${role.id}">${role.name}</option>
-										</c:forEach>
+										</c:forEach> --%>
+										<option value="1">ROLE_ADMIN</option>
+										<option value="2">ROLE_OPERATOR</option>
 									</select>
 								</div>
 							</div>
-
 						</div>
 					</div>
 				</div>
 			</div>
+			</form>
 		</div>
-	</form>
+		<div class="form-horizontal">
+		
+			<div class="panel panel-default">
+					
+					<div class="panel-heading">
+						<div class="container-fluid header-padding">
+							<div class="row-fluid">
+								<div class="span7" align="left">User List</div>
+								<!-- <div class="span5" align="right">
+									<input type="submit" class="btn-save" value="" id="btnsave" />
+								</div> -->
+							</div>
+						</div>
+					</div>
+					
+					<div class="panel-body">
+						<div class="singleline-records">
+					<table id="idtable" class="table table-bordered insideform" style="font-size: 12px;">
+						<tr bgcolor="#84939f">
+							<th>Name</th>
+							<th>Role</th>
+							<th>Mobile Number</th>
+							<th>Email Id</th>
+							<th>UserName</th>
+						</tr>
+						<c:forEach items="${userList}" var="user"> 
+							<tr>
+								<td>${user.name}</td>
+								<td>
+									<c:forEach items="${user.roles}" var="role">
+										${role.name},
+									</c:forEach>
+								</td>
+								<td>${user.mobileNo}</td>
+								<td>${user.email}</td>
+								<td>${user.username}</td>
+							</tr>
+						</c:forEach>
+					</table>
+				</div>
+					</div>
+					
+			</div>
+
+		</div>
 </fieldset>
+
+ 
+
+

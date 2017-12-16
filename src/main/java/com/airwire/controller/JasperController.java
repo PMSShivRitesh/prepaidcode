@@ -48,10 +48,25 @@ public class JasperController {
 				usedPlanInfoDTO.setPrepaidCode(usedPlanInfoDTO.getWuserid()+", Password :"+usedPlanInfoDTO.getWpassword());
 			}
 			list.add(usedPlanInfoDTO);
-			String jasperFilePath = httpServletRequest.getServletContext().getRealPath("WEB-INF/view/jasper/Blank_A4_with_HotelName.jasper");//Blank_A4_Shivshanker.jrxml
+			System.out.println("Called Jasper");
+			String jasperFilePath="";
+			try{
+				jasperFilePath=httpServletRequest.getSession().getServletContext().getRealPath("WEB-INF/view/jasper/Blank_A4_with_HotelName.jasper");
+			}catch(Exception e){
+				System.out.println("In Exception");
+				e.printStackTrace();
+				jasperFilePath="/usr/local/tomcat8/webapps/airwire/WEB-INF/view/jasper/Blank_A4_with_HotelName.jasper";
+			}
+			System.out.println("Path Loaded"+jasperFilePath);
+			if(jasperFilePath==null){
+				jasperFilePath="/usr/local/tomcat8/webapps/airwire/WEB-INF/view/jasper/Blank_A4_with_HotelName.jasper";
+				System.out.println("Mannually assign ::"+jasperFilePath);
+			}
+			
 			ByteArrayOutputStream resultOutputStream =  new ByteArrayOutputStream();
 			HashMap<String, Object> params = new HashMap<String, Object>();
 			JasperReport jr = (JasperReport)JRLoader.loadObject(new File(jasperFilePath));
+			//InputStream is=this.getClass().getResourceAsStream("/com/medicam/servlets/Invoice.jrxml")
 			JasperPrint jp = JasperFillManager.fillReport(jr, params, new JRBeanCollectionDataSource(list));
 			JRPdfExporter jrPdfExporter=new JRPdfExporter();
 			jrPdfExporter.setParameter(JRExporterParameter.JASPER_PRINT, jp);
@@ -63,8 +78,9 @@ public class JasperController {
 			String today = formatter.format(date);
 
 			ServletOutputStream outputStream = httpServletResponse.getOutputStream();
-
+			System.out.println("OK");
 			if(resultOutputStream != null){
+				System.out.println("Final");
 				httpServletResponse.setHeader("Content-Disposition", "inline; filename=\"" + "PrepaidCode_"+today+"."+ "pdf" + "\"");
 				httpServletResponse.setContentType("application/pdf");
 				outputStream.write(resultOutputStream.toByteArray());
@@ -85,7 +101,20 @@ public class JasperController {
 		try {
 			list=prepaidCodeService.getBulkPrepaidCode(plan,count,principal.getName());
 			if(list!=null && list.size()>0){
-			String jasperFilePath = httpServletRequest.getServletContext().getRealPath("WEB-INF/view/jasper/Blank_A4_with_HotelName.jasper");//Blank_A4_Shivshanker.jrxml
+				System.out.println("Called Jasper");
+				String jasperFilePath="";
+				try{
+					jasperFilePath=httpServletRequest.getSession().getServletContext().getRealPath("WEB-INF/view/jasper/Blank_A4_with_HotelName.jasper");
+				}catch(Exception e){
+					System.out.println("In Exception");
+					e.printStackTrace();
+					jasperFilePath="/usr/local/tomcat8/webapps/airwire/WEB-INF/view/jasper/Blank_A4_with_HotelName.jasper";
+				}
+				System.out.println("Path Loaded"+jasperFilePath);
+				if(jasperFilePath==null){
+					jasperFilePath="/usr/local/tomcat8/webapps/airwire/WEB-INF/view/jasper/Blank_A4_with_HotelName.jasper";
+					System.out.println("Mannually assign ::"+jasperFilePath);
+				}
 			ByteArrayOutputStream resultOutputStream =  new ByteArrayOutputStream();
 			HashMap<String, Object> params = new HashMap<String, Object>();
 			JasperReport jr = (JasperReport)JRLoader.loadObject(new File(jasperFilePath));

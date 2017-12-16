@@ -2,6 +2,7 @@ package com.airwire.service;
 
 import java.util.List;
 
+import com.airwire.model.HotelInfo;
 import com.airwire.model.Role;
 import com.airwire.model.User;
 /**
@@ -16,4 +17,5 @@ public interface UserService {
 	List<User> findAll();
 	List<Role> findAllRole();
 	Role getRoleById(Long id);
+	List<User> getAllUserListByHotel(HotelInfo hotelInfo);
 }

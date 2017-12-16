@@ -22,7 +22,7 @@
 								<input type="hidden" class="form-control" id="guestName"
 										name="id"  value="${hotelInfo.id}"  />
 									<input type="text" class="form-control" id="guestName"
-										name="hotelName"  value="${hotelInfo.hotelName}" />
+										name="hotelName"  value="${hotelInfo.hotelName}" disabled/>
 								</div>
 							</div>
 
@@ -31,7 +31,7 @@
 								<div class="controls">
 									<%-- <input type="text" class="form-control" id="mobileNo"
 										name="controllerName" value="${hotelInfo.controllerName}"/> --%>
-						<select class="" id="controllerName" name="controllerName">
+						<select class="" id="controllerName" name="controllerName" disabled>
 							
 							<option value="WIFISOFT" <c:if test="${hotelInfo.controllerName == 'WIFISOFY'}"> selected</c:if> >WIFI-SOFT</option>
 							<option value="ANTLABS" <c:if test="${hotelInfo.controllerName == 'ANTLABS'}"> selected</c:if>>ANTLABS</option>
@@ -58,14 +58,14 @@
 								<label class="control-label">SMS Vendor</label>
 								<div class="controls">
 									<input type="text" class="form-control" id="guestName"
-										name="smsVendor" value="${hotelInfo.smsVendor}" />
+										name="smsVendor" value="${hotelInfo.smsVendor}" disabled/>
 								</div>
 							</div>
 							<div class="control-group">
 								<label class="control-label">SMS User Id</label>
 								<div class="controls">
 									<input type="text" class="form-control" id="guestName"
-										name="userId" value="${hotelInfo.userId}" />
+										name="userId" value="${hotelInfo.userId}" disabled/>
 								</div>
 							</div>
 
@@ -73,14 +73,14 @@
 								<label class="control-label">SMS Sender Id</label>
 								<div class="controls">
 									<input type="text" class="form-control" id="mobileNo"
-										name="senderId" value="${hotelInfo.senderId}" />
+										name="senderId" value="${hotelInfo.senderId}" disabled/>
 								</div>
 							</div>
 							<div class="control-group">
 								<label class="control-label">SMS Password</label>
 								<div class="controls">
 									<input type="password" class="form-control" id="mobileNo"
-										name="password" value="${hotelInfo.password}" />
+										name="password" value="${hotelInfo.password}" disabled />
 								</div>
 							</div>
 

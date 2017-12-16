@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.airwire.dao.RoleRepository;
 import com.airwire.dao.UserRepository;
+import com.airwire.model.HotelInfo;
 import com.airwire.model.Role;
 import com.airwire.model.User;
 import com.airwire.service.UserService;
@@ -30,8 +31,6 @@ public class UserServiceImpl implements UserService {
         //user.setRoles(new HashSet<>(roleRepository.findAll()));
         userRepository.save(user);
     }
-    
-    
 
     @Override
     public User findByUsername(String username) {
@@ -40,19 +39,23 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public List<User> findAll() {
-		// TODO Auto-generated method stub
 		return userRepository.findAll();
 	}
 
 	@Override
 	public List<Role> findAllRole() {
-		// TODO Auto-generated method stub
 		return roleRepository.findAll();
 	}
 	
 	@Override
 	public Role getRoleById(Long id) {
-		// TODO Auto-generated method stub
 		return roleRepository.findById(id);
+	}
+
+
+
+	@Override
+	public List<User> getAllUserListByHotel(HotelInfo hotelInfo) {
+		return userRepository.findByHotlInfo(hotelInfo);
 	}
 }
