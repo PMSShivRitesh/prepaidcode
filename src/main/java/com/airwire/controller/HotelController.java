@@ -25,6 +25,7 @@ public class HotelController {
 	@Autowired
     private UserService userService;
 	
+	
 	 @RequestMapping(value = "/hotelsetup", method = RequestMethod.GET)
 	    public String hotelSetup(Model model,Principal pricipal) {
 	    	String userName=pricipal.getName();
