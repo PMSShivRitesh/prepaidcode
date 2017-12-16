@@ -24,9 +24,9 @@ import org.springframework.web.multipart.MultipartFile;
 import com.airwire.model.HotelInfo;
 import com.airwire.model.PrepaidCode;
 import com.airwire.model.User;
+import com.airwire.service.HotelService;
 import com.airwire.service.PrepaidCodeService;
 import com.airwire.service.UserService;
-import com.airwire.service.impl.HotelServiceImpl;
 
 import au.com.bytecode.opencsv.CSVReader;
 
@@ -35,25 +35,28 @@ public class UploadController {
 
 	@Autowired
 	PrepaidCodeService prepaidCodeService;
-	
+
 	@Autowired
 	UserService userService;
-	
+
 	@Autowired
-	HotelServiceImpl hotlService;
+	HotelService hotelService;
 
 	private CSVReader reader;
 
 	private BufferedOutputStream stream;
-	
+
 	@RequestMapping("importcsv")
-	public String uploadcsv(Model model,Principal principal){
+	public String uploadcsv(Model model, Principal principal) {
 		model.addAttribute("userName", principal.getName());
+		model.addAttribute("hotelInfoList", hotelService.findAll());
 		return "admin/importcsv";
 	}
-	
+
 	@RequestMapping(value = "uploadprepaidcodeexcelfile", method = RequestMethod.POST)
-	public String uploadprepaidCodeExcelFile(Principal principal, ModelMap model,@RequestParam("file")  MultipartFile file,@RequestParam("days") int plan,@RequestParam("amount") int amount,HttpServletRequest request) {
+	public String uploadprepaidCodeExcelFile(Principal principal, ModelMap model,
+			@RequestParam("file") MultipartFile file, @RequestParam(required = false) Long hotelId,
+			@RequestParam("days") int plan, @RequestParam("amount") int amount, HttpServletRequest request) {
 		if (file.isEmpty()) {
 			model.put("msg", "failed to upload file because its empty");
 			return "mainpage";
@@ -82,95 +85,29 @@ public class UploadController {
 			FileReader fileReader = new FileReader(serverFile);
 			reader = new CSVReader(fileReader, ';', '\'', 1);
 			User user = userService.findByUsername(principal.getName());
-			
+			HotelInfo hotelInfo = null;
+			if (hotelId != null && hotelId > 0) {
+				hotelInfo = hotelService.findById(hotelId);
+			} else {
+				hotelInfo = user.getHotlInfo();
+			}
+
 			while ((nextLine = reader.readNext()) != null) {
 				StringTokenizer t = new StringTokenizer(nextLine[0]);
 				PrepaidCode prepaidCode = new PrepaidCode();
-				if(user.getHotlInfo().getControllerName().equalsIgnoreCase("WIFISOFT")){
+				if (hotelInfo.getControllerName().equalsIgnoreCase("WIFISOFT")) {
 					String prepaidCodeTemp = t.nextToken(",");
-					prepaidCodeTemp=prepaidCodeTemp.replaceAll("\"", "");
+					prepaidCodeTemp = prepaidCodeTemp.replaceAll("\"", "");
 					prepaidCode.setPrepaidCode(prepaidCodeTemp);
-				}else{
+				} else {
 					String wuserid = t.nextToken(",");
 					String wpassword = t.nextToken(",");
-					wuserid=wuserid.replaceAll("\"", "");
-					wpassword=wpassword.replaceAll("\"", "");
+					wuserid = wuserid.replaceAll("\"", "");
+					wpassword = wpassword.replaceAll("\"", "");
 					prepaidCode.setWuserid(wuserid);
 					prepaidCode.setWpassword(wpassword);
 				}
-				
-				prepaidCode.setHotelInfo(user.getHotlInfo());
-				prepaidCode.setAmount(amount);
-				prepaidCode.setDays(plan);
-				prepaidCode.setStatus("1");
-				prepaidCode.setUser(user);
-				Date date = new Date();
-				prepaidCode.setDate(date);
-				prepaidCodeService.savePrepaidCode(prepaidCode);
-			}
 
-		} catch (IOException e) {
-			model.put("msg","error while reading csv andprocess : " + e.getMessage());
-		} 
-		model.put("msg", "File successfully uploaded and processed");
-		return "admin/importcsv";
-	}
-	
-	@RequestMapping("importcsvbysuperadmin")
-	public String uploadcsvBySuperAdmin(Model model,Principal principal){
-		model.addAttribute("userName", principal.getName());
-		model.addAttribute("hotelInfoList",hotlService.findAll());
-		return "superadmin/importcsv";
-	}
-	
-	@RequestMapping(value = "uploadprepaidcodeexcelfilebysuperadmin", method = RequestMethod.POST)
-	public String uploadprepaidCodeExcelFileBySuperAdmin(Principal principal, ModelMap model,@RequestParam("file")  MultipartFile file,@RequestParam("hotelId") long hotelId,@RequestParam("days") int plan,@RequestParam("amount") int amount,HttpServletRequest request) {
-		if (file.isEmpty()) {
-			model.put("msg", "failed to upload file because its empty");
-			return "mainpage";
-		}
-		String rootPath = request.getSession().getServletContext().getRealPath("/");
-		File dir = new File(rootPath + File.separator + "uploadedfile");
-		if (!dir.exists()) {
-			dir.mkdirs();
-		}
-		File serverFile = new File(dir.getAbsolutePath() + File.separator + file.getOriginalFilename());
-		try {
-			InputStream is = file.getInputStream();
-			stream = new BufferedOutputStream(new FileOutputStream(serverFile));
-			int i;
-			while ((i = is.read()) != -1) {
-				stream.write(i);
-			}
-			stream.flush();
-
-		} catch (IOException e) {
-			model.put("msg", "failed to process file because : " + e.getMessage());
-			return "admin/importcsv";
-		}
-		String[] nextLine;
-		try {
-			FileReader fileReader = new FileReader(serverFile);
-			reader = new CSVReader(fileReader, ';', '\'', 1);
-			User user = userService.findByUsername(principal.getName());
-			HotelInfo hotelInfo = hotlService.findById(hotelId);
-			
-			while ((nextLine = reader.readNext()) != null) {
-				StringTokenizer t = new StringTokenizer(nextLine[0]);
-				PrepaidCode prepaidCode = new PrepaidCode();
-				if(hotelInfo.getControllerName().equalsIgnoreCase("WIFISOFT")){
-					String prepaidCodeTemp = t.nextToken(",");
-					prepaidCodeTemp=prepaidCodeTemp.replaceAll("\"", "");
-					prepaidCode.setPrepaidCode(prepaidCodeTemp);
-				}else{
-					String wuserid = t.nextToken(",");
-					String wpassword = t.nextToken(",");
-					wuserid=wuserid.replaceAll("\"", "");
-					wpassword=wpassword.replaceAll("\"", "");
-					prepaidCode.setWuserid(wuserid);
-					prepaidCode.setWpassword(wpassword);
-				}
-				
 				prepaidCode.setHotelInfo(hotelInfo);
 				prepaidCode.setAmount(amount);
 				prepaidCode.setDays(plan);
@@ -182,9 +119,9 @@ public class UploadController {
 			}
 
 		} catch (IOException e) {
-			model.put("msg","error while reading csv andprocess : " + e.getMessage());
-		} 
+			model.put("msg", "error while reading csv andprocess : " + e.getMessage());
+		}
 		model.put("msg", "File successfully uploaded and processed");
-		return "redirect:importcsvbysuperadmin";
+		return "admin/importcsv";
 	}
 }

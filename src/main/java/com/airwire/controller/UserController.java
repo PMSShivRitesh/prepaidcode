@@ -2,6 +2,7 @@ package com.airwire.controller;
 
 import java.security.Principal;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
@@ -11,10 +12,13 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.airwire.model.Role;
 import com.airwire.model.User;
+import com.airwire.service.HotelService;
 import com.airwire.service.UserService;
+
 
 /**
  * 
@@ -25,6 +29,9 @@ import com.airwire.service.UserService;
 public class UserController {
     @Autowired
     private UserService userService;
+    
+    @Autowired
+    private HotelService hotelService;
 
     /*@RequestMapping(value = "/registration", method = RequestMethod.GET)
     public String registration(Model model) {
@@ -37,22 +44,38 @@ public class UserController {
     public String createUser(Model model, Principal principal) {
         model.addAttribute("roleList", userService.findAllRole());
         User user = userService.findByUsername(principal.getName());
-        List<User> userList = userService.getAllUserListByHotel(user.getHotlInfo());
+        Set<Role> roleSet= user.getRoles();
+        List<User> userList=null;
+        Iterator<Role> it = roleSet.iterator();
+        if(it.hasNext()){
+        	Role role = (Role) it.next();
+        	if(role.getName()!=null && (role.getName().equals("ROLE_SUPERADMIN")||role.getName().equals("ROLE_SYSTEMADMIN"))){
+        		 userList = userService.findAll();
+        	}else{
+        		userList = userService.getAllUserListByHotel(user.getHotlInfo());
+        	}
+        }
         model.addAttribute("userList",userList);
         model.addAttribute("userName",principal.getName());
+		model.addAttribute("orgList",hotelService.findAll());
         return "admin/createuser";
     }
     
     
  
     @RequestMapping(value = "/createuser", method = RequestMethod.POST)
-    public String savehotelSetup(@ModelAttribute("command") User user, Principal principal, Model model) {
+    public String savehotelSetup(@ModelAttribute("command") User user, Principal principal, Model model,@RequestParam(required=false) Long orgId) {
     	Role role = userService.getRoleById(user.getRoleId());
     	Set<Role> setRole = new HashSet<Role>();
     	setRole.add(role);
     	user.setRoles(setRole);
-    	User adminUser = userService.findByUsername(principal.getName());
-    	user.setHotlInfo(adminUser.getHotlInfo());
+    	if(orgId!=null && orgId>0){
+    		user.setHotlInfo(hotelService.findById(orgId));
+    	}else{
+    		User adminUser = userService.findByUsername(principal.getName());
+    		user.setHotlInfo(adminUser.getHotlInfo());
+    	}
+    	
 	 	userService.save(user);
         return "redirect:createuser";
     }

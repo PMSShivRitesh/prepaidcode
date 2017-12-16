@@ -3,11 +3,10 @@ package com.airwire.service;
 import java.util.List;
 
 import com.airwire.model.HotelInfo;
-import com.airwire.model.User;
 
-public interface HotlService {
+public interface HotelService {
 
-	HotelInfo save(HotelInfo hotlInfo, User user);
+	HotelInfo save(HotelInfo hotlInfo);
 
 	HotelInfo findById(Long hotelId);
 

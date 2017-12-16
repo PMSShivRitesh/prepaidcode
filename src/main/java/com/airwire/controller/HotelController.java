@@ -14,48 +14,54 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.airwire.dto.HotelInfoDto;
 import com.airwire.model.HotelInfo;
 import com.airwire.model.User;
-import com.airwire.service.HotlService;
+import com.airwire.service.HotelService;
 import com.airwire.service.UserService;
-
+/**
+ * 
+ * @author ShivshankerMhadiwale
+ *
+ */
 @Controller
 public class HotelController {
 
 	@Autowired
-	HotlService hotlService;
+	HotelService hotelService;
 	@Autowired
-    private UserService userService;
-	
-	
-	 @RequestMapping(value = "/hotelsetup", method = RequestMethod.GET)
-	    public String hotelSetup(Model model,Principal pricipal) {
-	    	String userName=pricipal.getName();
-	    	User user = userService.findByUsername(userName);
-	    	HotelInfo hotelInfo = user.getHotlInfo();
-	    	if(hotelInfo==null){
-	    		hotelInfo = new HotelInfo();
-	    	}
-	    	model.addAttribute("hotelInfo",hotelInfo);
-	    	model.addAttribute("userName",userName);
-	        return "admin/hotelsetup";
-	    }
-	 
-	 @RequestMapping(value = "/hotelsetup", method = RequestMethod.POST)
-	    public String savehotelSetup(@ModelAttribute("command") HotelInfoDto hotelInfoDto, Principal principal, Model model) {
-	    	
-		 String userName=principal.getName();
-	    	User user = userService.findByUsername(userName);
-	    	//Set<User> userSet= new HashSet<User>();
-	    	//userSet.add(user);
-		 	HotelInfo hotelInfo = new HotelInfo();
-		 	try {
-				BeanUtils.copyProperties(hotelInfo, hotelInfoDto);
-			} catch (IllegalAccessException e) {
-			} catch (InvocationTargetException e) {
-				e.printStackTrace();
-			}
-		 	//hotelInfo.setUser(userSet);
-	    	hotelInfo=hotlService.save(hotelInfo,user);
-	    	model.addAttribute("hotelInfo",hotelInfo);
-	        return "redirect:hotelsetup";
-	    }
+	private UserService userService;
+
+	@RequestMapping(value = "/hotelsetup", method = RequestMethod.GET)
+	public String hotelSetup(Model model, Principal pricipal) {
+		String userName = pricipal.getName();
+		User user = userService.findByUsername(userName);
+		HotelInfo hotelInfo = user.getHotlInfo();
+		if (hotelInfo == null) {
+			hotelInfo = new HotelInfo();
+		}
+		model.addAttribute("hotelInfo", hotelInfo);
+		model.addAttribute("userName", userName);
+		return "admin/hotelsetup";
+	}
+
+	@RequestMapping(value = "/hotelsetup", method = RequestMethod.POST)
+	public String savehotelSetup(@ModelAttribute("command") HotelInfoDto hotelInfoDto, Principal principal,
+			Model model) {
+
+		HotelInfo hotelInfo = new HotelInfo();
+		try {
+			BeanUtils.copyProperties(hotelInfo, hotelInfoDto);
+		} catch (IllegalAccessException e) {
+		} catch (InvocationTargetException e) {
+			e.printStackTrace();
+		}
+		boolean orgCreated = false;
+		if (hotelInfo.getId()!=null && hotelInfo.getId() > 0) {
+			orgCreated = true;
+		}
+		hotelInfo = hotelService.save(hotelInfo);
+		model.addAttribute("hotelInfo", hotelInfo);
+		if (orgCreated) {
+			return "redirect:hotelsetup";
+		}
+		return "redirect:createorganization";
+	}
 }

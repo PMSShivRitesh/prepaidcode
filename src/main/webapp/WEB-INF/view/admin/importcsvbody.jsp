@@ -12,6 +12,13 @@
 				<div class="singleline-records">
 					<form class="form-horizontal" method="POST"
 						enctype="multipart/form-data" action="uploadprepaidcodeexcelfile">
+						<security:authorize access="hasRole('ROLE_SUPERADMIN') or hasRole('ROLE_SYSTEMADMIN')">		
+						<select class="" id="hotelId" name="hotelId">
+							<c:forEach var="hotelInfo" items="${hotelInfoList}">
+								<option value="${hotelInfo.id}" > ${hotelInfo.hotelName}</option>
+							</c:forEach>
+						</select> 
+						</security:authorize>	
 						Select Plan <select class="" id="plan" name="days">
 							<option value="1">1 Day</option>
 							<option value="2">2 Day</option>

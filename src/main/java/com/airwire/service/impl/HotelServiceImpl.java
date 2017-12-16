@@ -6,25 +6,20 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.airwire.dao.HotelInfoRepository;
-import com.airwire.dao.UserRepository;
 import com.airwire.model.HotelInfo;
-import com.airwire.model.User;
-import com.airwire.service.HotlService;
+import com.airwire.service.HotelService;
 
-@Service("hotlService")
-public class HotelServiceImpl implements HotlService {
+@Service("hotelService")
+public class HotelServiceImpl implements HotelService {
 
 	@Autowired
 	HotelInfoRepository hotelInfoRepository;
 	
-	 @Autowired
-	   private UserRepository userRepository;
-	
 	@Override
-	public HotelInfo save(HotelInfo hotelInfo, User user) {
+	public HotelInfo save(HotelInfo hotelInfo) {
 		hotelInfo = hotelInfoRepository.save(hotelInfo);
-		user.setHotlInfo(hotelInfo);
-		userRepository.save(user);
+		//user.setHotlInfo(hotelInfo);
+		//userRepository.save(user);
     	return hotelInfo;
 	}
 

@@ -16,7 +16,20 @@
 				<div class="container-fluid panel-body">
 					<div class="row-fluid search-align">
 						<div class="firstquad">
-							
+
+							<security:authorize access="hasRole('ROLE_SUPERADMIN') or hasRole('ROLE_SYSTEMADMIN')">
+							<div class="control-group">
+								<label class="control-label">Select Org Name</label>
+								<div class="controls">
+									<select class="" id="orgId" name="orgId">
+										<c:forEach var="org" items="${orgList}">
+											<option value="${org.id}">${org.hotelName}</option>
+										</c:forEach>
+									</select>
+								</div>
+							</div>
+							</security:authorize>
+
 							<div class="control-group">
 								<label class="control-label">Name</label>
 								<div class="controls">
