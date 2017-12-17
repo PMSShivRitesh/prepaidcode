@@ -8,7 +8,11 @@ import org.springframework.data.jpa.repository.Query;
 
 import com.airwire.model.PrepaidCode;
 import com.airwire.model.UsedPlanInfo;
-
+/**
+ * 
+ * @author ShivshankerMhadiwale
+ *
+ */
 public interface UsedPlanInfoRepository extends JpaRepository<UsedPlanInfo,Long>{
 	UsedPlanInfo getUsedPlanInfoByPrepaidCode(PrepaidCode prepaidCode);
 

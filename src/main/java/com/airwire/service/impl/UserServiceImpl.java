@@ -56,6 +56,6 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public List<User> getAllUserListByHotel(HotelInfo hotelInfo) {
-		return userRepository.findByHotlInfo(hotelInfo);
+		return userRepository.findByHotelInfo(hotelInfo);
 	}
 }

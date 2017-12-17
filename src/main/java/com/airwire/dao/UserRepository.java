@@ -14,5 +14,5 @@ import com.airwire.model.User;
 public interface UserRepository extends JpaRepository<User, Long> {
     User findByUsername(String username);
     List<User> findAll();
-    List<User> findByHotlInfo(HotelInfo hotelInfo);
+    List<User> findByHotelInfo(HotelInfo hotelInfo);
 }

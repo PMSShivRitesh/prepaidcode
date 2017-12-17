@@ -15,6 +15,7 @@
 						<security:authorize access="hasRole('ROLE_SUPERADMIN') or hasRole('ROLE_SYSTEMADMIN')">		
 						<select class="" id="hotelId" name="hotelId">
 							<c:forEach var="hotelInfo" items="${hotelInfoList}">
+								<option value="">Select</option>
 								<option value="${hotelInfo.id}" > ${hotelInfo.hotelName}</option>
 							</c:forEach>
 						</select> 

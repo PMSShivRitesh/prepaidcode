@@ -29,7 +29,11 @@ import com.airwire.service.PrepaidCodeService;
 import com.airwire.service.UserService;
 
 import au.com.bytecode.opencsv.CSVReader;
-
+/**
+ * 
+ * @author ShivshankerMhadiwale
+ *
+ */
 @Controller
 public class UploadController {
 
@@ -89,7 +93,7 @@ public class UploadController {
 			if (hotelId != null && hotelId > 0) {
 				hotelInfo = hotelService.findById(hotelId);
 			} else {
-				hotelInfo = user.getHotlInfo();
+				hotelInfo = user.getHotelInfo();
 			}
 
 			while ((nextLine = reader.readNext()) != null) {

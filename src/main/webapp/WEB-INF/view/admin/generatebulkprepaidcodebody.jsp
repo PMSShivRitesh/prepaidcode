@@ -11,6 +11,19 @@
 			<div class="panel-body">
 				<div class="singleline-records">
 					<form class="form-horizontal" method="GET" action="bulkprepaidcode" target="_blank">
+					<security:authorize access="hasRole('ROLE_SUPERADMIN') or hasRole('ROLE_SYSTEMADMIN')">
+							<div class="control-group">
+								<label class="control-label">Select Org Name</label>
+								<div class="controls">
+									<select class="" id="orgId" name="orgId">
+									<option value="">Select</option>
+										<c:forEach var="org" items="${orgList}">
+											<option value="${org.id}">${org.hotelName}</option>
+										</c:forEach>
+									</select>
+								</div>
+							</div>
+							</security:authorize>
 						Select Plan <select class="" id="plan" name="plan">
 							<option value="1">1 Day</option>
 							<option value="2">2 Day</option>

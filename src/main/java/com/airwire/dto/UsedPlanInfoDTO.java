@@ -1,6 +1,10 @@
 package com.airwire.dto;
 import java.util.Date;
-
+/**
+ * 
+ * @author ShivshankerMhadiwale
+ *
+ */
 public class UsedPlanInfoDTO {
 
 	private Integer id;
@@ -19,6 +23,9 @@ public class UsedPlanInfoDTO {
 	
 	private String wuserid;
 	private String wpassword;
+	
+	
+	private Long orgId;
 
 	public Integer getId() {
 		return id;
@@ -138,5 +145,13 @@ public class UsedPlanInfoDTO {
 
 	public void setWpassword(String wpassword) {
 		this.wpassword = wpassword;
+	}
+
+	public Long getOrgId() {
+		return orgId;
+	}
+
+	public void setOrgId(Long orgId) {
+		this.orgId = orgId;
 	}
 }

@@ -14,7 +14,11 @@ import com.airwire.model.HotelInfo;
 import com.airwire.model.UsedPlanInfo;
 import com.airwire.service.PrepaidCodeService;
 import com.airwire.service.SmsService;
-
+/**
+ * 
+ * @author ShivshankerMhadiwale
+ *
+ */
 @Service("smsService")
 public class SmsServiceImpl implements SmsService {
 
@@ -22,10 +26,10 @@ public class SmsServiceImpl implements SmsService {
 	PrepaidCodeService prepaidCodeService;
 
 	@Override
-	public String sendSms(String prepaidCode,String userName) {
+	public String sendSms(String prepaidCode,String userName,Long orgId) {
 		String response = "";
-		UsedPlanInfo usedPlanInfo = prepaidCodeService.getUsedPlanInfoByCode(prepaidCode,userName);
-		HotelInfo hotelInfo = usedPlanInfo.getUser().getHotlInfo();
+		UsedPlanInfo usedPlanInfo = prepaidCodeService.getUsedPlanInfoByCode(prepaidCode,userName,orgId);
+		HotelInfo hotelInfo = usedPlanInfo.getUser().getHotelInfo();
 		//String message = "Welcome To " + hotelInfo.getHotelName() + " WiFi Zone" + " your WiFi Prepaid code for ";
 		String message = hotelInfo.getMessage();
 		if(hotelInfo.getControllerName().equalsIgnoreCase("WIFISOFT")){

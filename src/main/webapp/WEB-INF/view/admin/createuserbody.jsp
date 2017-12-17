@@ -22,6 +22,7 @@
 								<label class="control-label">Select Org Name</label>
 								<div class="controls">
 									<select class="" id="orgId" name="orgId">
+									<option value="">Select</option>
 										<c:forEach var="org" items="${orgList}">
 											<option value="${org.id}">${org.hotelName}</option>
 										</c:forEach>

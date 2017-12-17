@@ -33,7 +33,7 @@ public class HotelController {
 	public String hotelSetup(Model model, Principal pricipal) {
 		String userName = pricipal.getName();
 		User user = userService.findByUsername(userName);
-		HotelInfo hotelInfo = user.getHotlInfo();
+		HotelInfo hotelInfo = user.getHotelInfo();
 		if (hotelInfo == null) {
 			hotelInfo = new HotelInfo();
 		}

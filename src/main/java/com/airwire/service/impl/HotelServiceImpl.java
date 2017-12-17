@@ -8,7 +8,11 @@ import org.springframework.stereotype.Service;
 import com.airwire.dao.HotelInfoRepository;
 import com.airwire.model.HotelInfo;
 import com.airwire.service.HotelService;
-
+/**
+ * 
+ * @author ShivshankerMhadiwale
+ *
+ */
 @Service("hotelService")
 public class HotelServiceImpl implements HotelService {
 

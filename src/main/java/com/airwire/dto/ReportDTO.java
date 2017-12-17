@@ -1,7 +1,11 @@
 package com.airwire.dto;
 
 import java.util.Date;
-
+/**
+ * 
+ * @author ShivshankerMhadiwale
+ *
+ */
 public class ReportDTO {
 	
 	private Date fromDate;

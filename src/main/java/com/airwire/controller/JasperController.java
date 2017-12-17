@@ -31,7 +31,11 @@ import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import net.sf.jasperreports.engine.export.JRPdfExporter;
 import net.sf.jasperreports.engine.util.JRLoader;
-
+/**
+ * 
+ * @author ShivshankerMhadiwale
+ *
+ */
 @Controller
 public class JasperController {
 
@@ -39,36 +43,41 @@ public class JasperController {
 	PrepaidCodeService prepaidCodeService;
 
 	@RequestMapping("myReport")
-	public void myReport(@RequestParam(required=true) String prepaidCode, HttpServletRequest httpServletRequest,HttpServletResponse httpServletResponse,Principal principal){
+	public void myReport(@RequestParam(required = true) String prepaidCode,@RequestParam(required = false) Long orgId, HttpServletRequest httpServletRequest,
+			HttpServletResponse httpServletResponse, Principal principal) {
 
-		List<UsedPlanInfoDTO>list=new ArrayList<UsedPlanInfoDTO>();
+		List<UsedPlanInfoDTO> list = new ArrayList<UsedPlanInfoDTO>();
 		try {
-			UsedPlanInfoDTO usedPlanInfoDTO = prepaidCodeService.getUsedPlanDTOByPrepaidCode(prepaidCode,principal.getName());
-			if(usedPlanInfoDTO.getPrepaidCode()==null){
-				usedPlanInfoDTO.setPrepaidCode(usedPlanInfoDTO.getWuserid()+", Password :"+usedPlanInfoDTO.getWpassword());
+			UsedPlanInfoDTO usedPlanInfoDTO = prepaidCodeService.getUsedPlanDTOByPrepaidCode(prepaidCode,
+					principal.getName(),orgId);
+			if (usedPlanInfoDTO.getPrepaidCode() == null) {
+				usedPlanInfoDTO
+						.setPrepaidCode(usedPlanInfoDTO.getWuserid() + ", Password :" + usedPlanInfoDTO.getWpassword());
 			}
 			list.add(usedPlanInfoDTO);
 			System.out.println("Called Jasper");
-			String jasperFilePath="";
-			try{
-				jasperFilePath=httpServletRequest.getSession().getServletContext().getRealPath("WEB-INF/view/jasper/Blank_A4_with_HotelName.jasper");
-			}catch(Exception e){
+			String jasperFilePath = "";
+			try {
+				jasperFilePath = httpServletRequest.getSession().getServletContext()
+						.getRealPath("WEB-INF/view/jasper/Blank_A4_with_HotelName.jasper");
+			} catch (Exception e) {
 				System.out.println("In Exception");
 				e.printStackTrace();
-				jasperFilePath="/usr/local/tomcat8/webapps/airwire/WEB-INF/view/jasper/Blank_A4_with_HotelName.jasper";
+				jasperFilePath = "/usr/local/tomcat8/webapps/airwire/WEB-INF/view/jasper/Blank_A4_with_HotelName.jasper";
 			}
-			System.out.println("Path Loaded"+jasperFilePath);
-			if(jasperFilePath==null){
-				jasperFilePath="/usr/local/tomcat8/webapps/airwire/WEB-INF/view/jasper/Blank_A4_with_HotelName.jasper";
-				System.out.println("Mannually assign ::"+jasperFilePath);
+			System.out.println("Path Loaded" + jasperFilePath);
+			if (jasperFilePath == null) {
+				jasperFilePath = "/usr/local/tomcat8/webapps/airwire/WEB-INF/view/jasper/Blank_A4_with_HotelName.jasper";
+				System.out.println("Mannually assign ::" + jasperFilePath);
 			}
-			
-			ByteArrayOutputStream resultOutputStream =  new ByteArrayOutputStream();
+
+			ByteArrayOutputStream resultOutputStream = new ByteArrayOutputStream();
 			HashMap<String, Object> params = new HashMap<String, Object>();
-			JasperReport jr = (JasperReport)JRLoader.loadObject(new File(jasperFilePath));
-			//InputStream is=this.getClass().getResourceAsStream("/com/medicam/servlets/Invoice.jrxml")
+			JasperReport jr = (JasperReport) JRLoader.loadObject(new File(jasperFilePath));
+			// InputStream
+			// is=this.getClass().getResourceAsStream("/com/medicam/servlets/Invoice.jrxml")
 			JasperPrint jp = JasperFillManager.fillReport(jr, params, new JRBeanCollectionDataSource(list));
-			JRPdfExporter jrPdfExporter=new JRPdfExporter();
+			JRPdfExporter jrPdfExporter = new JRPdfExporter();
 			jrPdfExporter.setParameter(JRExporterParameter.JASPER_PRINT, jp);
 			jrPdfExporter.setParameter(JRExporterParameter.OUTPUT_STREAM, resultOutputStream);
 			jrPdfExporter.exportReport();
@@ -79,9 +88,10 @@ public class JasperController {
 
 			ServletOutputStream outputStream = httpServletResponse.getOutputStream();
 			System.out.println("OK");
-			if(resultOutputStream != null){
+			if (resultOutputStream != null) {
 				System.out.println("Final");
-				httpServletResponse.setHeader("Content-Disposition", "inline; filename=\"" + "PrepaidCode_"+today+"."+ "pdf" + "\"");
+				httpServletResponse.setHeader("Content-Disposition",
+						"inline; filename=\"" + "PrepaidCode_" + today + "." + "pdf" + "\"");
 				httpServletResponse.setContentType("application/pdf");
 				outputStream.write(resultOutputStream.toByteArray());
 			}
@@ -91,60 +101,66 @@ public class JasperController {
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} 
+		}
 	}
 
 	@RequestMapping("bulkprepaidcode")
-	public void bulkPrepaidcode(@RequestParam(required=true) String plan, @RequestParam(required=true) int count,  HttpServletRequest httpServletRequest,HttpServletResponse httpServletResponse,Principal principal){
+	public void bulkPrepaidcode(@RequestParam(required = true) String plan, @RequestParam(required = true) int count,
+			@RequestParam(required = false) Long orgId,
+			HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Principal principal) {
 
-		List<UsedPlanInfoDTO>list;
+		List<UsedPlanInfoDTO> list;
 		try {
-			list=prepaidCodeService.getBulkPrepaidCode(plan,count,principal.getName());
-			if(list!=null && list.size()>0){
+			list = prepaidCodeService.getBulkPrepaidCode(plan, count, principal.getName(),orgId);
+			if (list != null && list.size() > 0) {
 				System.out.println("Called Jasper");
-				String jasperFilePath="";
-				try{
-					jasperFilePath=httpServletRequest.getSession().getServletContext().getRealPath("WEB-INF/view/jasper/Blank_A4_with_HotelName.jasper");
-				}catch(Exception e){
+				String jasperFilePath = "";
+				try {
+					jasperFilePath = httpServletRequest.getSession().getServletContext()
+							.getRealPath("WEB-INF/view/jasper/Blank_A4_with_HotelName.jasper");
+				} catch (Exception e) {
 					System.out.println("In Exception");
 					e.printStackTrace();
-					jasperFilePath="/usr/local/tomcat8/webapps/airwire/WEB-INF/view/jasper/Blank_A4_with_HotelName.jasper";
+					jasperFilePath = "/usr/local/tomcat8/webapps/airwire/WEB-INF/view/jasper/Blank_A4_with_HotelName.jasper";
 				}
-				System.out.println("Path Loaded"+jasperFilePath);
-				if(jasperFilePath==null){
-					jasperFilePath="/usr/local/tomcat8/webapps/airwire/WEB-INF/view/jasper/Blank_A4_with_HotelName.jasper";
-					System.out.println("Mannually assign ::"+jasperFilePath);
+				System.out.println("Path Loaded" + jasperFilePath);
+				if (jasperFilePath == null) {
+					jasperFilePath = "/usr/local/tomcat8/webapps/airwire/WEB-INF/view/jasper/Blank_A4_with_HotelName.jasper";
+					System.out.println("Mannually assign ::" + jasperFilePath);
 				}
-			ByteArrayOutputStream resultOutputStream =  new ByteArrayOutputStream();
-			HashMap<String, Object> params = new HashMap<String, Object>();
-			JasperReport jr = (JasperReport)JRLoader.loadObject(new File(jasperFilePath));
-			JasperPrint jp = JasperFillManager.fillReport(jr, params, new JRBeanCollectionDataSource(list));
-			JRPdfExporter jrPdfExporter=new JRPdfExporter();
-			jrPdfExporter.setParameter(JRExporterParameter.JASPER_PRINT, jp);
-			jrPdfExporter.setParameter(JRExporterParameter.OUTPUT_STREAM, resultOutputStream);
-			jrPdfExporter.exportReport();
+				ByteArrayOutputStream resultOutputStream = new ByteArrayOutputStream();
+				HashMap<String, Object> params = new HashMap<String, Object>();
+				JasperReport jr = (JasperReport) JRLoader.loadObject(new File(jasperFilePath));
+				JasperPrint jp = JasperFillManager.fillReport(jr, params, new JRBeanCollectionDataSource(list));
+				JRPdfExporter jrPdfExporter = new JRPdfExporter();
+				jrPdfExporter.setParameter(JRExporterParameter.JASPER_PRINT, jp);
+				jrPdfExporter.setParameter(JRExporterParameter.OUTPUT_STREAM, resultOutputStream);
+				jrPdfExporter.exportReport();
 
-			DateFormat formatter = new SimpleDateFormat("EEEE_dd_MM_yyyy_hh_mm_ss_SSS_a");
-			Date date = Calendar.getInstance().getTime();
-			String today = formatter.format(date);
+				DateFormat formatter = new SimpleDateFormat("EEEE_dd_MM_yyyy_hh_mm_ss_SSS_a");
+				Date date = Calendar.getInstance().getTime();
+				String today = formatter.format(date);
 
-			ServletOutputStream outputStream = httpServletResponse.getOutputStream();
+				ServletOutputStream outputStream = httpServletResponse.getOutputStream();
 
-			if(resultOutputStream != null){
-				httpServletResponse.setHeader("Content-Disposition", "inline; filename=\"" + "PrepaidCode_"+today+"."+ "pdf" + "\"");
-				httpServletResponse.setContentType("application/pdf");
-				outputStream.write(resultOutputStream.toByteArray());
+				if (resultOutputStream != null) {
+					httpServletResponse.setHeader("Content-Disposition",
+							"inline; filename=\"" + "PrepaidCode_" + today + "." + "pdf" + "\"");
+					httpServletResponse.setContentType("application/pdf");
+					outputStream.write(resultOutputStream.toByteArray());
+				}
+				outputStream.flush();
+				outputStream.close();
 			}
-			outputStream.flush();
-			outputStream.close();
-			}
+					if((list==null) ||(list.size()==0)){
+						PrintWriter out = httpServletResponse.getWriter();
+						out.write("Selected Prepaide Code Plan Is not Available Please Upload File to Generate Prepaid Code");
+					}
 			
-			PrintWriter out=httpServletResponse.getWriter();
-			out.write("Selected Prepaide Code Plan Is not Available Please Upload File to Generate Prepaid Code");
 
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} 
+		}
 	}
 }

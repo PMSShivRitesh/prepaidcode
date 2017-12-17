@@ -31,6 +31,20 @@
 				<div class="container-fluid panel-body">
 					<div class="row-fluid search-align">
 						<div class="firstquad">
+						<security:authorize access="hasRole('ROLE_SUPERADMIN') or hasRole('ROLE_SYSTEMADMIN')">
+							<div class="control-group">
+								<label class="control-label">Select Org Name</label>
+								<div class="controls">
+									<select class="" id="orgId" name="orgId">
+										<c:forEach var="org" items="${orgList}">
+										<option value="">Select</option>
+											<option value="${org.id}">${org.hotelName}</option>
+										</c:forEach>
+									</select>
+								</div>
+							</div>
+							</security:authorize>
+							
 							<div class="control-group">
 								<label class="control-label">Select Plan<font
 									color="red">*</font></label>
@@ -188,6 +202,7 @@ $('#idwarning').hide();
 
 	function call() {
 		var days = $("#days").val();
+		var orgId= $("#orgId").val();
 		if (days != 0) {
 			$("#amount").val("");
 			$.ajax({
@@ -195,7 +210,8 @@ $('#idwarning').hide();
 				type : 'GET',
 
 				data : {
-					days : days
+					days : days,
+					orgId :orgId
 				},
 				success : function(data) {
 					//alert(data);

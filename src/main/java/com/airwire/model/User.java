@@ -32,7 +32,7 @@ public class User {
     private Long roleId;
     private Set<Role> roles;
     private Set<PrepaidCode> PrepaidCode;
-    private HotelInfo hotlInfo;
+    private HotelInfo hotelInfo;
     private Set<UsedPlanInfo> usedPlanInfo;
 
     @Id
@@ -127,12 +127,12 @@ public class User {
 
     @ManyToOne()
     @JoinColumn(name ="hotlInfo_id")
-	public HotelInfo getHotlInfo() {
-		return hotlInfo;
+	public HotelInfo getHotelInfo() {
+		return hotelInfo;
 	}
 
-	public void setHotlInfo(HotelInfo hotlInfo) {
-		this.hotlInfo = hotlInfo;
+	public void setHotelInfo(HotelInfo hotelInfo) {
+		this.hotelInfo = hotelInfo;
 	}
 
 	@OneToMany(mappedBy="user")

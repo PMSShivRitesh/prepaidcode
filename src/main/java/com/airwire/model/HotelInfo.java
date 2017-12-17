@@ -68,7 +68,7 @@ public class HotelInfo {
 		this.userId = userId;
 	}
 	
-	@OneToMany(mappedBy="hotlInfo")
+	@OneToMany(mappedBy="hotelInfo")
 	public Set<User> getUser() {
 		return user;
 	}

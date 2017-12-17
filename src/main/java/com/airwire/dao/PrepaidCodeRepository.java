@@ -7,7 +7,11 @@ import org.springframework.data.jpa.repository.Query;
 
 import com.airwire.model.HotelInfo;
 import com.airwire.model.PrepaidCode;
-
+/**
+ * 
+ * @author ShivshankerMhadiwale
+ *
+ */
 public interface PrepaidCodeRepository extends JpaRepository<PrepaidCode,Long>{
 
 	@Query("Select p from PrepaidCode p where p.days=?1 and p.status=?2 and p.hotelInfo=?3")

@@ -8,7 +8,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.airwire.service.SmsService;
-
+/**
+ * 
+ * @author ShivshankerMhadiwale
+ *
+ */
 @RestController
 public class SendSmsController {
 
@@ -16,8 +20,8 @@ public class SendSmsController {
 	SmsService smsService;
 	
 	@RequestMapping("sendprepaidcodeassms")
-	public String myReport(@RequestParam(required=true) String prepaidCode,Principal principal){
-		return smsService.sendSms(prepaidCode,principal.getName());
+	public String myReport(@RequestParam(required=true) String prepaidCode,@RequestParam(required=false) Long orgId,Principal principal){
+		return smsService.sendSms(prepaidCode,principal.getName(),orgId);
 	}
 
 }

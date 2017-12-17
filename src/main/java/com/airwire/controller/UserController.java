@@ -19,7 +19,6 @@ import com.airwire.model.User;
 import com.airwire.service.HotelService;
 import com.airwire.service.UserService;
 
-
 /**
  * 
  * @author ShivshankerMhadiwale
@@ -27,92 +26,90 @@ import com.airwire.service.UserService;
  */
 @Controller
 public class UserController {
-    @Autowired
-    private UserService userService;
-    
-    @Autowired
-    private HotelService hotelService;
+	@Autowired
+	private UserService userService;
 
-    /*@RequestMapping(value = "/registration", method = RequestMethod.GET)
-    public String registration(Model model) {
-        model.addAttribute("userForm", new User());
+	@Autowired
+	private HotelService hotelService;
 
-        return "registration";
-    }*/
-    
-    @RequestMapping(value = "/createuser", method = RequestMethod.GET)
-    public String createUser(Model model, Principal principal) {
-        model.addAttribute("roleList", userService.findAllRole());
-        User user = userService.findByUsername(principal.getName());
-        Set<Role> roleSet= user.getRoles();
-        List<User> userList=null;
-        Iterator<Role> it = roleSet.iterator();
-        if(it.hasNext()){
-        	Role role = (Role) it.next();
-        	if(role.getName()!=null && (role.getName().equals("ROLE_SUPERADMIN")||role.getName().equals("ROLE_SYSTEMADMIN"))){
-        		 userList = userService.findAll();
-        	}else{
-        		userList = userService.getAllUserListByHotel(user.getHotlInfo());
-        	}
-        }
-        model.addAttribute("userList",userList);
-        model.addAttribute("userName",principal.getName());
-		model.addAttribute("orgList",hotelService.findAll());
-        return "admin/createuser";
-    }
-    
-    
- 
-    @RequestMapping(value = "/createuser", method = RequestMethod.POST)
-    public String savehotelSetup(@ModelAttribute("command") User user, Principal principal, Model model,@RequestParam(required=false) Long orgId) {
-    	Role role = userService.getRoleById(user.getRoleId());
-    	Set<Role> setRole = new HashSet<Role>();
-    	setRole.add(role);
-    	user.setRoles(setRole);
-    	if(orgId!=null && orgId>0){
-    		user.setHotlInfo(hotelService.findById(orgId));
-    	}else{
-    		User adminUser = userService.findByUsername(principal.getName());
-    		user.setHotlInfo(adminUser.getHotlInfo());
-    	}
-    	
-	 	userService.save(user);
-        return "redirect:createuser";
-    }
+	/*
+	 * @RequestMapping(value = "/registration", method = RequestMethod.GET)
+	 * public String registration(Model model) { model.addAttribute("userForm",
+	 * new User());
+	 * 
+	 * return "registration"; }
+	 */
 
-   /* @RequestMapping(value = "/registration", method = RequestMethod.POST)
-    public String registration(@ModelAttribute("userForm") User userForm, BindingResult bindingResult, Model model) {
-        userValidator.validate(userForm, bindingResult);
+	@RequestMapping(value = "/createuser", method = RequestMethod.GET)
+	public String createUser(Model model, Principal principal) {
+		model.addAttribute("roleList", userService.findAllRole());
+		User user = userService.findByUsername(principal.getName());
+		Set<Role> roleSet = user.getRoles();
+		List<User> userList = null;
+		Iterator<Role> it = roleSet.iterator();
+		if (it.hasNext()) {
+			Role role = (Role) it.next();
+			if (role.getName() != null
+					&& (role.getName().equals("ROLE_SUPERADMIN") || role.getName().equals("ROLE_SYSTEMADMIN"))) {
+				userList = userService.findAll();
+			} else {
+				userList = userService.getAllUserListByHotel(user.getHotelInfo());
+			}
+		}
+		model.addAttribute("userList", userList);
+		model.addAttribute("userName", principal.getName());
+		model.addAttribute("orgList", hotelService.findAll());
+		return "admin/createuser";
+	}
 
-        if (bindingResult.hasErrors()) {
-            return "registration";
-        }
+	@RequestMapping(value = "/createuser", method = RequestMethod.POST)
+	public String savehotelSetup(@ModelAttribute("command") User user, Principal principal, Model model,
+			@RequestParam(required = false) Long orgId) {
+		Role role = userService.getRoleById(user.getRoleId());
+		Set<Role> setRole = new HashSet<Role>();
+		setRole.add(role);
+		user.setRoles(setRole);
+		if (orgId != null && orgId > 0) {
+			user.setHotelInfo(hotelService.findById(orgId));
+		} else {
+			User adminUser = userService.findByUsername(principal.getName());
+			user.setHotelInfo(adminUser.getHotelInfo());
+		}
 
-        userService.save(userForm);
+		userService.save(user);
+		return "redirect:createuser";
+	}
 
-        securityService.autologin(userForm.getUsername(), userForm.getPasswordConfirm());
+	/*
+	 * @RequestMapping(value = "/registration", method = RequestMethod.POST)
+	 * public String registration(@ModelAttribute("userForm") User userForm,
+	 * BindingResult bindingResult, Model model) {
+	 * userValidator.validate(userForm, bindingResult);
+	 * 
+	 * if (bindingResult.hasErrors()) { return "registration"; }
+	 * 
+	 * userService.save(userForm);
+	 * 
+	 * securityService.autologin(userForm.getUsername(),
+	 * userForm.getPasswordConfirm());
+	 * 
+	 * return "redirect:/welcome"; }
+	 */
+	@RequestMapping(value = { "/login", "/accessdenied", "/error" }, method = RequestMethod.GET)
+	public String login(Model model, String error, String logout) {
+		if (error != null)
+			model.addAttribute("error", "Your username and password is invalid.");
 
-        return "redirect:/welcome";
-    }
-*/
-    @RequestMapping(value = {"/login","/accessdenied","/error"}, method = RequestMethod.GET)
-    public String login(Model model, String error, String logout) {
-        if (error != null)
-            model.addAttribute("error", "Your username and password is invalid.");
+		if (logout != null)
+			model.addAttribute("message", "You have been logged out successfully.");
 
-        if (logout != null)
-            model.addAttribute("message", "You have been logged out successfully.");
+		return "login/login";
+	}
 
-        return "login/login";
-    }
-    
-    
-   
+	@RequestMapping(value = { "/", "/welcome" }, method = RequestMethod.GET)
+	public String welcome(Principal principal, Model model) {
 
-    @RequestMapping(value = {"/", "/welcome"}, method = RequestMethod.GET)
-    public String welcome(Principal principal,Model model) {
-    	
-    	model.addAttribute("userName",principal.getName());
-        return "home/home";
-    }
+		model.addAttribute("userName", principal.getName());
+		return "home/home";
+	}
 }

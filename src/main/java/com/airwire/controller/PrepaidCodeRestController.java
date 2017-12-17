@@ -12,7 +12,11 @@ import org.springframework.web.bind.annotation.RestController;
 import com.airwire.dto.PrepaidCodeDeatail;
 import com.airwire.service.PrepaidCodeService;
 import com.airwire.service.SmsService;
-
+/**
+ * 
+ * @author ShivshankerMhadiwale
+ *
+ */
 @RestController
 public class PrepaidCodeRestController {
 
@@ -23,9 +27,9 @@ public class PrepaidCodeRestController {
 	SmsService smsService;
 	
 	@RequestMapping("prepaidcodestatusbyday")
-	public PrepaidCodeDeatail getprepaidcode(@RequestParam("days") String days,Principal principal)
+	public PrepaidCodeDeatail getprepaidcode(@RequestParam("days") String days,@RequestParam(required=false) Long orgId,Principal principal)
 	{
-		PrepaidCodeDeatail prepaidCodeDeatail = prepaidCodeService.getPrepaidCode(days,principal.getName());
+		PrepaidCodeDeatail prepaidCodeDeatail = prepaidCodeService.getPrepaidCode(days,principal.getName(),orgId);
 		return prepaidCodeDeatail;
 	}
 	

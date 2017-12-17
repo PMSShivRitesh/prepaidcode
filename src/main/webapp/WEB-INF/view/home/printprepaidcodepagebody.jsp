@@ -78,12 +78,14 @@
 							</div>
 							<div class="control-group">
 								<form action="myReport" method="GET" target="_blank">
+								
 								<c:if test="${not empty usedPlanInfo.prepaidCode}">
 								<input type="hidden" id="prepaidCode" name="prepaidCode" value="${usedPlanInfo.prepaidCode}"/>
 								</c:if>
 								<c:if test="${not empty usedPlanInfo.wuserid}">
 								<input type="hidden" id="prepaidCode" name="prepaidCode" value="${usedPlanInfo.wuserid}"/>
 								</c:if>
+								<input type="hidden" id="orgId" name="orgId" value="${usedPlanInfo.orgId}"/>
                                        
                                        <input type="Submit" class="btn btn-primary" value="Print"/>
                                        <input type="button" class="btn btn-primary" onclick="sendSms()" value="Send Sms"/>
@@ -115,10 +117,12 @@
 <script>
 function sendSms(){
 	var prepaidCode =$("#prepaidCode").val();
+	var orgId= $("orgId").val();
 	$.ajax({
         url:'sendprepaidcodeassms',
         type:'GET',
-        data:{"prepaidCode":prepaidCode},
+        data:{"prepaidCode":prepaidCode,
+        	  "orgId":orgId},
         success:function(data){
            $("#smsstatus").html("<font color='green'> "+data+"</font>");
         }
