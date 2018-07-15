@@ -35,6 +35,8 @@ public class HotelInfo {
 	
 	private Set<UsedPlanInfo> usedPlanInfo;
 	
+	private Set<Plan> plan;
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	public Long getId() {
@@ -116,6 +118,14 @@ public class HotelInfo {
 	}
 	public void setUsedPlanInfo(Set<UsedPlanInfo> usedPlanInfo) {
 		this.usedPlanInfo = usedPlanInfo;
+	}
+	
+	@OneToMany(mappedBy="hotelInfo")
+	public Set<Plan> getPlan() {
+		return plan;
+	}
+	public void setPlan(Set<Plan> plan) {
+		this.plan = plan;
 	}
 
 }
