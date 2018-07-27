@@ -36,8 +36,8 @@
 								<label class="control-label">Select Org Name</label>
 								<div class="controls">
 									<select class="" id="orgId" name="orgId">
+									<option value="">Select</option>
 										<c:forEach var="org" items="${orgList}">
-										<option value="">Select</option>
 											<option value="${org.id}">${org.hotelName}</option>
 										</c:forEach>
 									</select>
@@ -49,7 +49,7 @@
 								<label class="control-label">Select Plan<font
 									color="red">*</font></label>
 								<div class="controls">
-									<select id="days" name="days" onchange="call();"
+									<!-- <select id="days" name="days" onchange="call();"
 										Style="height: 25px; width: 206px !important;">
 										<option value="0">Select Plan</option>
 										<option value="1">1 Day</option>
@@ -59,7 +59,15 @@
 										<option value="7">1 Week</option>
 										<option value="15">15 Day</option>
 										<option value="30">1 Month</option>
-									</select>
+									</select> -->
+									
+									<select class="" id="plan" name="plan" onchange="call();"
+										Style="height: 25px; width: 206px !important;">
+							<option value="">Select</option>
+							<c:forEach var="plan" items="${planList}">
+								<option value="${plan.id}" > ${plan.name}</option>
+							</c:forEach>
+						</select> 
 								</div>
 							</div>
 
@@ -201,16 +209,16 @@ $('#idwarning').hide();
 	$('#date').val(dateStr);
 
 	function call() {
-		var days = $("#days").val();
+		var plan = $("#plan").val();
 		var orgId= $("#orgId").val();
-		if (days != 0) {
+		if (plan != 0) {
 			$("#amount").val("");
 			$.ajax({
 				url : 'prepaidcodestatusbyday',
 				type : 'GET',
 
 				data : {
-					days : days,
+					plan : plan,
 					orgId :orgId
 				},
 				success : function(data) {

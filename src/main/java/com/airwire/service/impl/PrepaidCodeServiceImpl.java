@@ -16,10 +16,12 @@ import com.airwire.dao.UserRepository;
 import com.airwire.dto.PrepaidCodeDeatail;
 import com.airwire.dto.UsedPlanInfoDTO;
 import com.airwire.model.HotelInfo;
+import com.airwire.model.Plan;
 import com.airwire.model.PrepaidCode;
 import com.airwire.model.UsedPlanInfo;
 import com.airwire.model.User;
 import com.airwire.service.HotelService;
+import com.airwire.service.PlanService;
 import com.airwire.service.PrepaidCodeService;
 /**
  * 
@@ -41,11 +43,26 @@ public class PrepaidCodeServiceImpl implements PrepaidCodeService {
 	@Autowired
 	HotelService hotelService;
 
+	@Autowired
+	private PlanService planService;
+
 	@Override
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = false)
 	public boolean savePrepaidCode(PrepaidCode prepaidCode) {
-		prepaidCode = prepaidCodeRepository.save(prepaidCode);
-		if (prepaidCode != null && prepaidCode.getId() > 0) {
+		
+		PrepaidCode prepaidCodetemp =null;
+		PrepaidCode prepaidCodeSavetemp =null;
+		if(prepaidCode.getPrepaidCode()!=null && !prepaidCode.getPrepaidCode().isEmpty()){
+			 prepaidCodetemp = prepaidCodeRepository.findByPrepaidCode(prepaidCode.getPrepaidCode(),prepaidCode.getHotelInfo());
+		}else{
+			 prepaidCodetemp = prepaidCodeRepository.findByWuserid(prepaidCode.getWuserid(),prepaidCode.getHotelInfo());
+		}
+		
+		if(prepaidCodetemp==null){
+			prepaidCodeSavetemp = prepaidCodeRepository.save(prepaidCode);
+		}
+		
+		if (prepaidCodeSavetemp != null && prepaidCodeSavetemp.getId() > 0) {
 			return true;
 		} else {
 			return false;
@@ -79,7 +96,7 @@ public class PrepaidCodeServiceImpl implements PrepaidCodeService {
 
 	@Override
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = false)
-	public PrepaidCodeDeatail getPrepaidCode(String days,String userName,Long orgId) {
+	public PrepaidCodeDeatail getPrepaidCode(Long plan,String userName,Long orgId) {
 		HotelInfo hotelInfo=null;
 		if(orgId!=null &&  orgId>0){
 			hotelInfo= hotelService.findById(orgId);
@@ -89,8 +106,10 @@ public class PrepaidCodeServiceImpl implements PrepaidCodeService {
 		}
 		
 		PrepaidCodeDeatail prepaidCodeDeatail = new PrepaidCodeDeatail();
-		Integer day = Integer.parseInt(days);
-		List<PrepaidCode> prepaidCodeList = prepaidCodeRepository.findByDays(day, "1",hotelInfo);
+		//Integer day = Integer.parseInt(days);
+		Plan planObject = planService.findById(plan);
+		/*List<PrepaidCode> prepaidCodeList = prepaidCodeRepository.findByDays(day, "1",hotelInfo);*/
+		List<PrepaidCode> prepaidCodeList = prepaidCodeRepository.findByPlan(planObject, "1",hotelInfo);
 		if (prepaidCodeList != null && prepaidCodeList.size()>0) {
 			prepaidCodeDeatail.setSize(prepaidCodeList.size());
 			prepaidCodeDeatail.setWarnPoint(hotelInfo.getWarnPoint());
@@ -113,7 +132,8 @@ public class PrepaidCodeServiceImpl implements PrepaidCodeService {
 	@Override
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = false)
 	public UsedPlanInfo saveRecord(UsedPlanInfo usedPlanInfo,Long orgId) {
-		PrepaidCodeDeatail prepaidCodeDeatail = getPrepaidCode(usedPlanInfo.getDays(),usedPlanInfo.getUser().getUsername(),orgId);
+		//PrepaidCodeDeatail prepaidCodeDeatail = getPrepaidCode(usedPlanInfo.getDays(),usedPlanInfo.getUser().getUsername(),orgId);
+		PrepaidCodeDeatail prepaidCodeDeatail = getPrepaidCode(usedPlanInfo.getPlan(),usedPlanInfo.getUser().getUsername(),orgId);
 		HotelInfo hotelInfo=null;
 		if(orgId!=null &&  orgId>0){
 			hotelInfo= hotelService.findById(orgId);
@@ -167,13 +187,16 @@ public class PrepaidCodeServiceImpl implements PrepaidCodeService {
 		usedPlanInfoDTO.setPrepaidCode(usedPlanInfo.getPrepaidCode().getPrepaidCode());
 		usedPlanInfoDTO.setWuserid(usedPlanInfo.getPrepaidCode().getWuserid());
 		usedPlanInfoDTO.setWpassword(usedPlanInfo.getPrepaidCode().getWpassword());
-		if(usedPlanInfo.getDays().equals("7")){
+		
+		/*if(usedPlanInfo.getDays().equals("7")){
 			usedPlanInfoDTO.setPlan("1 Week");
 		}if(usedPlanInfo.getDays().equals("30")){
 			usedPlanInfoDTO.setPlan("1 Month");
 		}else{
 			usedPlanInfoDTO.setPlan(usedPlanInfo.getDays());
-		}
+		}*/
+		
+		usedPlanInfoDTO.setPlan(usedPlanInfo.getPrepaidCode().getPlan().getName());
 		usedPlanInfoDTO.setDate(usedPlanInfo.getDate());
 		usedPlanInfoDTO.setAmount(usedPlanInfo.getAmount());
 		usedPlanInfoDTO.setGuestName(usedPlanInfo.getGuestName());
@@ -188,17 +211,22 @@ public class PrepaidCodeServiceImpl implements PrepaidCodeService {
 	}
 	
 	@Override
-	public List<UsedPlanInfoDTO> getBulkPrepaidCode(String days, int count, String userName,Long orgId) {
-		Integer day = Integer.parseInt(days);
+	public List<UsedPlanInfoDTO> getBulkPrepaidCode(Long plan, int count, String userName,Long orgId) {
+		//Integer day = Integer.parseInt(days);
 		User user = userRepository.findByUsername(userName);
-		List<PrepaidCode> prepaidCodeList = prepaidCodeRepository.findByDays(day,"1",user.getHotelInfo());
+		//List<PrepaidCode> prepaidCodeList = prepaidCodeRepository.findByDays(day,"1",user.getHotelInfo());
+		Plan planObject = planService.findById(plan);
+		List<PrepaidCode> prepaidCodeList = null;
+		HotelInfo hotelInfo=null;
 		if(orgId!=null && orgId>0){
-			HotelInfo hotelInfo = hotelService.findById(orgId);
-			prepaidCodeList = prepaidCodeRepository.findByDays(day,"1",hotelInfo);
+			 hotelInfo = hotelService.findById(orgId);
+			
 		}else{
 			user = userRepository.findByUsername(userName);
-			prepaidCodeList = prepaidCodeRepository.findByDays(day,"1",user.getHotelInfo());
+			hotelInfo=user.getHotelInfo();
+			prepaidCodeList = prepaidCodeRepository.findByPlan(planObject,"1",hotelInfo);
 		}
+		prepaidCodeList = prepaidCodeRepository.findByPlan(planObject,"1",hotelInfo);
 		
 		
 		List<UsedPlanInfoDTO> usedPlanInfoDTOList = new ArrayList<UsedPlanInfoDTO>(); 
@@ -217,13 +245,14 @@ public class PrepaidCodeServiceImpl implements PrepaidCodeService {
 					usedPlanInfoDTO.setPrepaidCode(prepaidCode.getWuserid()+", Password :"+prepaidCode.getWpassword());
 				}
 				
-				if(days.equals("7")){
-					usedPlanInfoDTO.setPlan("1 Week");
-				}if(days.equals("30")){
-					usedPlanInfoDTO.setPlan("1 Month");
-				}else{
-					usedPlanInfoDTO.setPlan(days);
-				}
+				//if(days.equals("7")){
+				//	usedPlanInfoDTO.setPlan("1 Week");
+				//}if(days.equals("30")){
+					//usedPlanInfoDTO.setPlan("1 Month");
+				//}else{
+					//usedPlanInfoDTO.setPlan(days);
+				//}
+				usedPlanInfoDTO.setPlan(prepaidCode.getPlan().getName());
 				usedPlanInfoDTO.setAmount(prepaidCode.getAmount());
 				usedPlanInfoDTO.setGuestName("");
 				usedPlanInfoDTO.setRoomNo("");
@@ -232,7 +261,7 @@ public class PrepaidCodeServiceImpl implements PrepaidCodeService {
 				usedPlanInfoDTO.setMobileNo("");
 				usedPlanInfoDTO.setAddress("");
 				usedPlanInfoDTO.setEmailId("");
-				usedPlanInfoDTO.setHotelName(prepaidCode.getUser().getHotelInfo().getHotelName());
+				usedPlanInfoDTO.setHotelName(hotelInfo.getHotelName());
 				usedPlanInfoDTOList.add(usedPlanInfoDTO);
 				
 			}

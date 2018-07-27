@@ -63,11 +63,11 @@ public class JasperController {
 			} catch (Exception e) {
 				System.out.println("In Exception");
 				e.printStackTrace();
-				jasperFilePath = "/usr/local/tomcat8/webapps/airwire/WEB-INF/view/jasper/Blank_A4_with_HotelName.jasper";
+				jasperFilePath = "/usr/local/apache-tomcat-9.0.4/webapps/airwire/WEB-INF/view/jasper/Blank_A4_with_HotelName.jasper";
 			}
 			System.out.println("Path Loaded" + jasperFilePath);
 			if (jasperFilePath == null) {
-				jasperFilePath = "/usr/local/tomcat8/webapps/airwire/WEB-INF/view/jasper/Blank_A4_with_HotelName.jasper";
+				jasperFilePath = "/usr/local/apache-tomcat-9.0.4/webapps/airwire/WEB-INF/view/jasper/Blank_A4_with_HotelName.jasper";
 				System.out.println("Mannually assign ::" + jasperFilePath);
 			}
 
@@ -105,7 +105,7 @@ public class JasperController {
 	}
 
 	@RequestMapping("bulkprepaidcode")
-	public void bulkPrepaidcode(@RequestParam(required = true) String plan, @RequestParam(required = true) int count,
+	public void bulkPrepaidcode(@RequestParam(required = true) Long plan, @RequestParam(required = true) int count,
 			@RequestParam(required = false) Long orgId,
 			HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Principal principal) {
 
@@ -121,11 +121,11 @@ public class JasperController {
 				} catch (Exception e) {
 					System.out.println("In Exception");
 					e.printStackTrace();
-					jasperFilePath = "/usr/local/tomcat8/webapps/airwire/WEB-INF/view/jasper/Blank_A4_with_HotelName.jasper";
+					jasperFilePath = "/usr/local/apache-tomcat-9.0.4/webapps/airwire/WEB-INF/view/jasper/Blank_A4_with_HotelName.jasper";
 				}
 				System.out.println("Path Loaded" + jasperFilePath);
 				if (jasperFilePath == null) {
-					jasperFilePath = "/usr/local/tomcat8/webapps/airwire/WEB-INF/view/jasper/Blank_A4_with_HotelName.jasper";
+					jasperFilePath = "/usr/local/apache-tomcat-9.0.4/webapps/airwire/WEB-INF/view/jasper/Blank_A4_with_HotelName.jasper";
 					System.out.println("Mannually assign ::" + jasperFilePath);
 				}
 				ByteArrayOutputStream resultOutputStream = new ByteArrayOutputStream();

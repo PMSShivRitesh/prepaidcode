@@ -8,10 +8,10 @@
 		<li id="1"><a href="generateprepaidcode"><i class="icon-pencil"></i>
 		<i class="icon-chevron-right"></i>Generate PrepaidCode</a></li>
 		
-		<security:authorize access="hasRole('ROLE_ADMIN') or hasRole('ROLE_SUPERADMIN') or hasRole('ROLE_SYSTEMADMIN')">
+		
 		<li id="1"><a href="generatebulkprepaidcode"><i class="icon-pencil"></i>
 		<i class="icon-chevron-right"></i>Gen Bulk PrepaidCode</a></li>
-		</security:authorize>
+		
 		
 		<security:authorize access="hasRole('ROLE_ADMIN') or hasRole('ROLE_SUPERADMIN') or hasRole('ROLE_SYSTEMADMIN')">
 		<li id="1"><a href="importcsv"><i class="icon-search"></i>
@@ -31,6 +31,9 @@
 		<security:authorize access="hasRole('ROLE_SYSTEMADMIN')">
 			 <li id="1"><a href="createorganization "><i class="icon-list"></i>
 			 <i class="icon-chevron-right"></i>Create Organization</a></li>
+			 
+			  <li id="1"><a href="createplan "><i class="icon-list"></i>
+			 <i class="icon-chevron-right"></i>Create Organization Plan</a></li>
 		</security:authorize>
 		
 		<!-- <li id="1"><a href="#"><i class="icon-search"></i>

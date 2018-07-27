@@ -27,9 +27,9 @@ public class PrepaidCodeRestController {
 	SmsService smsService;
 	
 	@RequestMapping("prepaidcodestatusbyday")
-	public PrepaidCodeDeatail getprepaidcode(@RequestParam("days") String days,@RequestParam(required=false) Long orgId,Principal principal)
+	public PrepaidCodeDeatail getprepaidcode(@RequestParam("plan") Long plan,@RequestParam(required=false) Long orgId,Principal principal)
 	{
-		PrepaidCodeDeatail prepaidCodeDeatail = prepaidCodeService.getPrepaidCode(days,principal.getName(),orgId);
+		PrepaidCodeDeatail prepaidCodeDeatail = prepaidCodeService.getPrepaidCode(plan,principal.getName(),orgId);
 		return prepaidCodeDeatail;
 	}
 	

@@ -133,7 +133,7 @@ public class SmsServiceImpl implements SmsService {
 		URLConnection myURLConnection = null;
 		URL myURL = null;
 		BufferedReader reader = null;
-		String mainUrl = "http://airwiresolutions.com/data.php";
+		String mainUrl = "http://www.airwiresolutions.com/data.php";
 		try {
 			myURL = new URL(mainUrl);
 			myURLConnection = myURL.openConnection();

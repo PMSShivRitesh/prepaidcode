@@ -37,6 +37,10 @@ public class PrepaidCode {
 	
 	private String wpassword;
 	
+	@ManyToOne
+	@JoinColumn(name="plan_id")
+	private Plan plan;
+	
 	
 	@ManyToOne
 	private User user;
@@ -116,5 +120,12 @@ public class PrepaidCode {
 	public void setWpassword(String wpassword) {
 		this.wpassword = wpassword;
 	}
+	public Plan getPlan() {
+		return plan;
+	}
+	public void setPlan(Plan plan) {
+		this.plan = plan;
+	}
+	
 	
 }

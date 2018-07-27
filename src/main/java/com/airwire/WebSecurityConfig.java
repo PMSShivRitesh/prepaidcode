@@ -28,7 +28,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable()
                 .authorizeRequests()
-             .antMatchers("/createuser","/hotelsetup","/importcsv","/generatebulkprepaidcode").access("hasRole('ROLE_ADMIN') or hasRole('ROLE_SUPERADMIN') or hasRole('ROLE_SYSTEMADMIN')")
+             .antMatchers("/createuser","/hotelsetup","/importcsv").access("hasRole('ROLE_ADMIN') or hasRole('ROLE_SUPERADMIN') or hasRole('ROLE_SYSTEMADMIN')")
                     .antMatchers("/resources/**", 
                     		"/registration","/login/**",
                     		"/template/**","/images/**",

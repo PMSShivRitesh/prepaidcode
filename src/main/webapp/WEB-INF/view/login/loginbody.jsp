@@ -43,7 +43,7 @@ if ((currMonth + 1) < 10) {
 
  var dateStr = currYear + "-" + currMonth + "-" + currDate; 
 
-$.ajax( {
+/* $.ajax( {
 	type:'Get',
 	url:'license',
 	success:function(data) {
@@ -55,6 +55,6 @@ $.ajax( {
 		//$('#loginDiv').html('Oop\'s, Your License Expired Please Contact System Administrator' );
 	 }
 	}
-	});
+	}); */
 
 </script>

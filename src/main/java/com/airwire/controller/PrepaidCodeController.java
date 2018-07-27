@@ -16,6 +16,7 @@ import com.airwire.model.Role;
 import com.airwire.model.UsedPlanInfo;
 import com.airwire.model.User;
 import com.airwire.service.HotelService;
+import com.airwire.service.PlanService;
 import com.airwire.service.PrepaidCodeService;
 import com.airwire.service.UserService;
 
@@ -35,6 +36,9 @@ public class PrepaidCodeController {
 	
 	@Autowired
 	HotelService hotelService;
+	
+	@Autowired
+	PlanService planService;
 
 	@RequestMapping("generateprepaidcode")
 	public String generatePrepaidCode(Principal principal, Model model) {
@@ -43,6 +47,13 @@ public class PrepaidCodeController {
 		for (Role role : user.getRoles()){
 			 model.addAttribute("role", role.getName());
 	    }
+		
+		if(user.getHotelInfo()==null){
+			model.addAttribute("planList", planService.findAll());
+		}else{
+			model.addAttribute("planList", planService.findByHotelInfo(user.getHotelInfo()));
+		}
+		
 		model.addAttribute("orgList",hotelService.findAll());
 		model.addAttribute("userName", principal.getName());
 		return "home/generateprepaidcode";
@@ -102,6 +113,12 @@ public class PrepaidCodeController {
 	public String uploadcsv(Model model,Principal principal){
 		model.addAttribute("userName", principal.getName());
 		model.addAttribute("orgList",hotelService.findAll());
+		User user = userService.findByUsername(principal.getName());
+		if(user.getHotelInfo()==null){
+			model.addAttribute("planList", planService.findAll());
+		}else{
+			model.addAttribute("planList", planService.findByHotelInfo(user.getHotelInfo()));
+		}
 		return "admin/generatebulkprepaidcode";
 	}
 	

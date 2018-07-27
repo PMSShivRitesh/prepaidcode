@@ -10,6 +10,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 /**
  * 
  * @author ShivshankerMhadiwale
@@ -37,6 +38,17 @@ public class UsedPlanInfo {
 	private String emailId;
 	private String days;
 	
+	@Transient
+	private Long plan;
+	
+	public Long getPlan() {
+		return plan;
+	}
+
+	public void setPlan(Long plan) {
+		this.plan = plan;
+	}
+
 	@ManyToOne
 	@JoinColumn(name="user_id")
 	private User user;

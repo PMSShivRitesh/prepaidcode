@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
 import com.airwire.model.HotelInfo;
+import com.airwire.model.Plan;
 import com.airwire.model.PrepaidCode;
 /**
  * 
@@ -22,5 +23,8 @@ public interface PrepaidCodeRepository extends JpaRepository<PrepaidCode,Long>{
 	
 	@Query("Select p from PrepaidCode p where p.wuserid=?1 and p.hotelInfo=?2")
 	PrepaidCode findByWuserid(String wuserid,HotelInfo hotelInfo);
+
+	@Query("Select p from PrepaidCode p where p.plan=?1 and p.status=?2 and p.hotelInfo=?3")
+	List<PrepaidCode> findByPlan(Plan plan, String string, HotelInfo hotelInfo);
 
 }

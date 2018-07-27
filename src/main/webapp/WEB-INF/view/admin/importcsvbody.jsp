@@ -14,13 +14,22 @@
 						enctype="multipart/form-data" action="uploadprepaidcodeexcelfile">
 						<security:authorize access="hasRole('ROLE_SUPERADMIN') or hasRole('ROLE_SYSTEMADMIN')">		
 						<select class="" id="hotelId" name="hotelId">
+							<option value="">Select</option>
 							<c:forEach var="hotelInfo" items="${hotelInfoList}">
-								<option value="">Select</option>
 								<option value="${hotelInfo.id}" > ${hotelInfo.hotelName}</option>
 							</c:forEach>
 						</select> 
 						</security:authorize>	
-						Select Plan <select class="" id="plan" name="days">
+						Select Plan 
+						
+						<select class="" id="plan" name="plan">
+							<option value="">Select</option>
+							<c:forEach var="plan" items="${planList}">
+								<option value="${plan.id}" > ${plan.name}</option>
+							</c:forEach>
+						</select> 
+						
+						<!-- <select class="" id="plan" name="plan">
 							<option value="1">1 Day</option>
 							<option value="2">2 Day</option>
 							<option value="3">3 Day</option>
@@ -29,7 +38,7 @@
 							<option value="15">15 Day</option>
 							<option value="30">1 Month</option>
 
-						</select> 
+						</select>  -->
 						Enter Amount <input type="text" class="" id="amount"
 							name="amount" value="0" readonly />
 							

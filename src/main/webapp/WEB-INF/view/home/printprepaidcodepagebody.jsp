@@ -48,7 +48,7 @@
 								<label class="control-label">PrepaidCode </label>
 								<div class="controls">
 									<div class="large m-wrap" id="prepaidcodeStatus">
-										<font color="red">${usedPlanInfo.prepaidCode}</font>
+										<font color="red" size="5px">${usedPlanInfo.prepaidCode}</font>
 									</div>
 								</div>
 							</c:if>	
@@ -58,7 +58,7 @@
 								<label class="control-label">User Id</label>
 								<div class="controls">
 									<div class="large m-wrap" id="prepaidcodeStatus">
-										<font color="red">${usedPlanInfo.wuserid} </font>&nbsp;&nbsp;&nbsp; Password &nbsp;&nbsp;&nbsp;<font color="red">${usedPlanInfo.wpassword}</font>
+										<font color="red" size="5px">${usedPlanInfo.wuserid} </font>&nbsp;&nbsp;&nbsp; Password &nbsp;&nbsp;&nbsp;<font color="red" size="5px">${usedPlanInfo.wpassword}</font>
 									</div>
 								</div>
 							</c:if>

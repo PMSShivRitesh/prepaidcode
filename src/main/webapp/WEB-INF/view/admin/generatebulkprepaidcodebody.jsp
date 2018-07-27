@@ -24,7 +24,8 @@
 								</div>
 							</div>
 							</security:authorize>
-						Select Plan <select class="" id="plan" name="plan">
+						Select Plan 
+						<!-- <select class="" id="plan" name="plan">
 							<option value="1">1 Day</option>
 							<option value="2">2 Day</option>
 							<option value="3">3 Day</option>
@@ -33,6 +34,13 @@
 							<option value="15">15 Day</option>
 							<option value="30">1 Month</option>
 
+						</select> 
+ -->						
+						<select class="" id="plan" name="plan">
+							<option value="">Select</option>
+							<c:forEach var="plan" items="${planList}">
+								<option value="${plan.id}" > ${plan.name}</option>
+							</c:forEach>
 						</select> 
 						Enter Quantity <input type="text" class="" id="count"
 							name="count" value="10" />

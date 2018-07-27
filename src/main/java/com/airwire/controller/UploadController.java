@@ -22,9 +22,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.airwire.model.HotelInfo;
+import com.airwire.model.Plan;
 import com.airwire.model.PrepaidCode;
 import com.airwire.model.User;
 import com.airwire.service.HotelService;
+import com.airwire.service.PlanService;
 import com.airwire.service.PrepaidCodeService;
 import com.airwire.service.UserService;
 
@@ -45,6 +47,11 @@ public class UploadController {
 
 	@Autowired
 	HotelService hotelService;
+	
+	@Autowired
+	PlanService planService;
+	
+	
 
 	private CSVReader reader;
 
@@ -54,13 +61,20 @@ public class UploadController {
 	public String uploadcsv(Model model, Principal principal) {
 		model.addAttribute("userName", principal.getName());
 		model.addAttribute("hotelInfoList", hotelService.findAll());
+		User user = userService.findByUsername(principal.getName());
+		if(user.getHotelInfo()==null){
+			model.addAttribute("planList", planService.findAll());
+		}else{
+			model.addAttribute("planList", planService.findByHotelInfo(user.getHotelInfo()));
+		}
+		
 		return "admin/importcsv";
 	}
 
 	@RequestMapping(value = "uploadprepaidcodeexcelfile", method = RequestMethod.POST)
 	public String uploadprepaidCodeExcelFile(Principal principal, ModelMap model,
 			@RequestParam("file") MultipartFile file, @RequestParam(required = false) Long hotelId,
-			@RequestParam("days") int plan, @RequestParam("amount") int amount, HttpServletRequest request) {
+			@RequestParam("plan") Long plan, @RequestParam("amount") int amount, HttpServletRequest request) {
 		if (file.isEmpty()) {
 			model.put("msg", "failed to upload file because its empty");
 			return "mainpage";
@@ -96,6 +110,7 @@ public class UploadController {
 				hotelInfo = user.getHotelInfo();
 			}
 
+			Plan planObject = planService.findById(plan);
 			while ((nextLine = reader.readNext()) != null) {
 				StringTokenizer t = new StringTokenizer(nextLine[0]);
 				PrepaidCode prepaidCode = new PrepaidCode();
@@ -114,7 +129,8 @@ public class UploadController {
 
 				prepaidCode.setHotelInfo(hotelInfo);
 				prepaidCode.setAmount(amount);
-				prepaidCode.setDays(plan);
+				prepaidCode.setPlan(planObject);
+				//prepaidCode.setDays(plan);
 				prepaidCode.setStatus("1");
 				prepaidCode.setUser(user);
 				Date date = new Date();
@@ -126,6 +142,15 @@ public class UploadController {
 			model.put("msg", "error while reading csv andprocess : " + e.getMessage());
 		}
 		model.put("msg", "File successfully uploaded and processed");
+		model.addAttribute("userName", principal.getName());
+		model.addAttribute("hotelInfoList", hotelService.findAll());
+		User user = userService.findByUsername(principal.getName());
+		if(user.getHotelInfo()==null){
+			model.addAttribute("planList", planService.findAll());
+		}else{
+			model.addAttribute("planList", planService.findByHotelInfo(user.getHotelInfo()));
+		}
+		
 		return "admin/importcsv";
 	}
 }

@@ -5,7 +5,7 @@
 				<div class="panel-heading">
 					<div class="container-fluid header-padding">
 						<div class="row-fluid">
-							<div class="span7" align="left">Generate PrepaidCode</div>
+							<div class="span7" align="left">Setup Organization</div>
 							<div class="span5" align="right">
 								<input type="submit" class="btn-save" value="" id="btnsave" />
 							</div>
@@ -17,7 +17,7 @@
 						<div class="firstquad">
 							
 							<div class="control-group">
-								<label class="control-label">Hotel Name</label>
+								<label class="control-label">Organization Name</label>
 								<div class="controls">
 								<input type="hidden" class="form-control" id="guestName"
 										name="id"  value="${hotelInfo.id}"  />
@@ -29,14 +29,8 @@
 							<div class="control-group">
 								<label class="control-label">Controller Name</label>
 								<div class="controls">
-									<%-- <input type="text" class="form-control" id="mobileNo"
-										name="controllerName" value="${hotelInfo.controllerName}"/> --%>
-						<select class="" id="controllerName" name="controllerName" readonly>
-							
-							<option value="WIFISOFT" <c:if test="${hotelInfo.controllerName == 'WIFISOFY'}"> selected</c:if> >WIFI-SOFT</option>
-							<option value="ANTLABS" <c:if test="${hotelInfo.controllerName == 'ANTLABS'}"> selected</c:if>>ANTLABS</option>
-							<option value="24ONLINE" <c:if test="${hotelInfo.controllerName == '24ONLINE'}"> selected</c:if>>24ONLINE</option>
-						</select> 
+								<input type="text" class="form-control" id="controllerName"
+										name="controllerName"  value="${hotelInfo.controllerName}" readonly/>
 								</div>
 							</div>
 							<div class="control-group">
