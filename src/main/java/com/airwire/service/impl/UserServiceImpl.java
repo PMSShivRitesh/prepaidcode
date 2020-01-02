@@ -50,7 +50,7 @@ public class UserServiceImpl implements UserService {
 	
 	@Override
 	public Role getRoleById(Long id) {
-		return roleRepository.findById(id);
+		return roleRepository.findById(id).orElse(null);
 	}
 
 

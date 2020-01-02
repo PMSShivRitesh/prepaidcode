@@ -1,4 +1,6 @@
 package com.airwire.dao;
+import java.util.Optional;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.airwire.model.Role;
@@ -8,5 +10,5 @@ import com.airwire.model.Role;
  *
  */
 public interface RoleRepository extends JpaRepository<Role, Long>{
-	Role findById(Long id);
+	Optional<Role> findById(Long id);
 }

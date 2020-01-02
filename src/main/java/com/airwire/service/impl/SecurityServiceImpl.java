@@ -9,18 +9,18 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Service;
 
-import com.airwire.service.SecurityService;
+import com.airwire.service.SecurityService1;
 /**
  * 
  * @author ShivshankerMhadiwale
  *
  */
-@Service
-public class SecurityServiceImpl implements SecurityService{
-    @Autowired
+//@Service
+public class SecurityServiceImpl implements SecurityService1{
+   // @Autowired
     private AuthenticationManager authenticationManager;
 
-    @Autowired
+    //@Autowired
     private UserDetailsService userDetailsService;
 
     private static final Logger logger = LoggerFactory.getLogger(SecurityServiceImpl.class);

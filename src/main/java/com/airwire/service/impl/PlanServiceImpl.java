@@ -27,7 +27,7 @@ public class PlanServiceImpl implements PlanService {
 	@Override
 	public Plan findById(Long id) {
 		// TODO Auto-generated method stub
-		return planRepository.findById(id);
+		return planRepository.findById(id).orElse(null);
 	}
 	
 	@Override

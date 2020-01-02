@@ -1,5 +1,6 @@
 package com.airwire.dao;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
@@ -11,6 +12,8 @@ import com.airwire.model.Plan;
  *
  */
 public interface PlanRepository extends JpaRepository<Plan, Long>{
-	Plan findById(Long id);
+	
+	Optional<Plan> findById(Long id);
+	
 	List<Plan> findByHotelInfo(HotelInfo hotelInfo);
 }

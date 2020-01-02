@@ -29,7 +29,7 @@ public class HotelServiceImpl implements HotelService {
 
 	@Override
 	public HotelInfo findById(Long hotelId) {
-		return hotelInfoRepository.findById(hotelId);
+		return hotelInfoRepository.findById(hotelId).orElse(null);
 	}
 
 	@Override

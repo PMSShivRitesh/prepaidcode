@@ -1,5 +1,7 @@
 package com.airwire.dao;
 
+import java.util.Optional;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.airwire.model.HotelInfo;
@@ -11,6 +13,6 @@ import com.airwire.model.HotelInfo;
  */
 public interface HotelInfoRepository extends JpaRepository<HotelInfo, Long>{
 
-	HotelInfo findById(Long hotelId);
+	Optional<HotelInfo> findById(Long hotelId);
 
 }
