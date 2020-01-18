@@ -99,16 +99,19 @@ public class PrepaidCodeController {
 	}
 	
 	@RequestMapping(value="report", method =RequestMethod.GET)
-	public String getReport(Model model){
+	public String getReport(Model model,Principal principal){
 		model.addAttribute("usedPlanInfoDTO",null);
+		model.addAttribute("userName", principal.getName());
 		return "admin/report";
 	}
 	
 	@RequestMapping(value="report", method =RequestMethod.POST)
-	public String getReportByDate(@ModelAttribute("command") ReportDTO reportDTO,Model model){
-		model.addAttribute("usedPlanInfoDTO",prepaidCodeService.getReportByDate(reportDTO.getFromDate(),reportDTO.getToDate()));
+	public String getReportByDate(@ModelAttribute("command") ReportDTO reportDTO,Model model,Principal principal){
+		model.addAttribute("usedPlanInfoDTOs",prepaidCodeService.getReportByDate(reportDTO.getFromDate(),reportDTO.getToDate()));
+		model.addAttribute("userName", principal.getName());
 		return "admin/report";
 	}
+	
 	@RequestMapping("generatebulkprepaidcode")
 	public String uploadcsv(Model model,Principal principal){
 		model.addAttribute("userName", principal.getName());

@@ -26,6 +26,8 @@
 		<security:authorize access="hasRole('ROLE_ADMIN') or hasRole('ROLE_SUPERADMIN') or hasRole('ROLE_SYSTEMADMIN')">
 		<li id="1"><a href="createuser"><i class="icon-list"></i>
 		<i class="icon-chevron-right"></i>Create User</a></li>
+		<li id="1"><a href="report"><i class="icon-list"></i>
+		<i class="icon-chevron-right"></i>Reports</a></li>
 		</security:authorize>
 		
 		<security:authorize access="hasRole('ROLE_SYSTEMADMIN')">
@@ -40,8 +42,7 @@
 		<i class="icon-chevron-right"></i>Todays PrepaidCode</a></li>
 		<li id="1"><a href="#"><i class="icon-list"></i>
 		<i class="icon-chevron-right"></i>Search PrepaidCode</a></li> -->
-		<!-- <li id="1"><a href="report"><i class="icon-list"></i>
-		<i class="icon-chevron-right"></i>Reports</a></li> -->
+		<!--  -->
 		
 	</ul>
 </div>

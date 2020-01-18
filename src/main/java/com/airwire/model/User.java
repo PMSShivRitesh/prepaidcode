@@ -30,6 +30,7 @@ public class User {
     private String password;
     private String passwordConfirm;
     private Long roleId;
+    private boolean active;
     private Set<Role> roles;
     private Set<PrepaidCode> PrepaidCode;
     private HotelInfo hotelInfo;
@@ -151,6 +152,14 @@ public class User {
 
 	public void setRoleId(Long roleId) {
 		this.roleId = roleId;
+	}
+
+	public boolean isActive() {
+		return active;
+	}
+
+	public void setActive(boolean active) {
+		this.active = active;
 	}
 
 

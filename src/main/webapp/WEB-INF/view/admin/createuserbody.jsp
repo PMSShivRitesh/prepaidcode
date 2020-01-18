@@ -120,8 +120,11 @@
 							<th>Mobile Number</th>
 							<th>Email Id</th>
 							<th>UserName</th>
+							<th>Reset</th>
+							<th>Delete</th>
 						</tr>
 						<c:forEach items="${userList}" var="user"> 
+							<c:if test="${user.active}">
 							<tr>
 								<td>${user.name}</td>
 								<td>
@@ -132,7 +135,10 @@
 								<td>${user.mobileNo}</td>
 								<td>${user.email}</td>
 								<td>${user.username}</td>
+								<td><a href="reset?id=${user.id}" >Reset</a></td>
+								<td><a href="delete?id=${user.id}" >Delete</a></td>
 							</tr>
+							</c:if>
 						</c:forEach>
 					</table>
 				</div>

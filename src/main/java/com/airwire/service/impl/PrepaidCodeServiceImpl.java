@@ -272,7 +272,30 @@ public class PrepaidCodeServiceImpl implements PrepaidCodeService {
 
 	@Override
 	public List<UsedPlanInfoDTO> getReportByDate(Date fromDate, Date toDate) {
-		List<UsedPlanInfo> usedPlanInfoList = usedPlanInfoRepository.getReportByDate(fromDate,toDate);
-		return null;
+//		List<UsedPlanInfo> usedPlanInfoList = usedPlanInfoRepository.getReportByDate(fromDate,toDate);
+//		return null;
+		
+		List<UsedPlanInfoDTO> usedPlanInfoDTOList = new ArrayList<UsedPlanInfoDTO>();
+		List<UsedPlanInfo> usedPlanInfoList =
+				usedPlanInfoRepository.getReportByDate(fromDate,toDate);
+		if(usedPlanInfoList!=null){
+			for(UsedPlanInfo usedPlanInfo: usedPlanInfoList){
+				UsedPlanInfoDTO usedPlanInfoDTO = new UsedPlanInfoDTO();
+
+				usedPlanInfoDTO.setGuestName(usedPlanInfo.getGuestName());
+				usedPlanInfoDTO.setRoomNo(usedPlanInfo.getRoomNo());
+				usedPlanInfoDTO.setEmailId(usedPlanInfo.getEmailId());
+				usedPlanInfoDTO.setDate(usedPlanInfo.getDate());
+				usedPlanInfoDTO.setMobileNo(usedPlanInfo.getMobileNo());
+				usedPlanInfoDTO.setPlan(usedPlanInfo.getPrepaidCode().getPlan().getName());
+				usedPlanInfoDTO.setGeneratedByUser(usedPlanInfo.getUser().getUsername());
+				usedPlanInfoDTO.setPhotoIdProofType(usedPlanInfo.getPhotoIdProofType());
+				usedPlanInfoDTO.setPhotoIdProof(usedPlanInfo.getPhotoIdProof());
+				usedPlanInfoDTO.setAddress(usedPlanInfo.getAddress());
+				usedPlanInfoDTOList.add(usedPlanInfoDTO);
+				
+			}
+		}
+		return usedPlanInfoDTOList;
 	}
 }

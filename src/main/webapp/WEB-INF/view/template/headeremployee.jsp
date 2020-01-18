@@ -41,6 +41,8 @@ $(document).ready(function(){
 		<li id="manager"><a href="#">Manager</a>
 		</li>
 		<li class="divider"></li> -->
+		<li id="manager"><a href="changepassword">Change Password</a>
+                		</li>
 		<li id="logout"><a href="#">Log Out</a>
 		</li>
 	</ul>

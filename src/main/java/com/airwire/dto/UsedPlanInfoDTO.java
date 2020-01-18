@@ -23,6 +23,7 @@ public class UsedPlanInfoDTO {
 	
 	private String wuserid;
 	private String wpassword;
+	private String generatedByUser;
 	
 	
 	private Long orgId;
@@ -153,5 +154,13 @@ public class UsedPlanInfoDTO {
 
 	public void setOrgId(Long orgId) {
 		this.orgId = orgId;
+	}
+
+	public String getGeneratedByUser() {
+		return generatedByUser;
+	}
+
+	public void setGeneratedByUser(String generatedByUser) {
+		this.generatedByUser = generatedByUser;
 	}
 }
